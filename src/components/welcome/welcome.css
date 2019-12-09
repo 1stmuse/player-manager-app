@@ -1,0 +1,21 @@
+/* .welcome{
+    justify-content: center;
+    margin-top: 30%;
+} */
+
+.left_welcome{
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10%;
+    /* width: 50%; */
+}
+
+.linked{
+    font-size: 2rem !important;
+}
+
+.left_welcome_link{
+    margin-top: 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
