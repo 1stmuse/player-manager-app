@@ -15,7 +15,7 @@ const Login = ({style, apply}) => {
                     <p>Password</p>
                     <input type='password' className='form-control'/>
                </div>
-               <button className='btn btn-primary pl-5 pr-5 mb-5 mt-3' >login</button>
+               <input type='submit' className='btn btn-primary pl-5 pr-5 mb-5 mt-3' value='login'/>
             </form>
         </div>
     );
