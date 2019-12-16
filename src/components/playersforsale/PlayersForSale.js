@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './PlayersForSale.css'
+
 
 
 const PlayersForSale = () => {
@@ -8,12 +10,12 @@ const PlayersForSale = () => {
 
 
     return (
-        <div>
+        <div className='player_desc'>
             <div>
                 <img src='' alt='image' />
             </div>
             <div>
-                <table className='table'>
+                <table className='table player_short_info'>
                     <tr>
                         <td>name</td>
                         <td>____</td>

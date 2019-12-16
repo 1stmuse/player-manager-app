@@ -1,10 +1,11 @@
 import React from 'react';
+import './playerInfo.css'
 
 
 
 const PlayerInfo = () => {
     return (
-        <div>
+        <div className='player_info'>
             <div>
                 <h4>Player Information</h4>
             </div>

@@ -1,0 +1,9 @@
+.player_desc{
+    width: 300px;
+    text-align: center;
+}
+
+
+.player_short_info{
+    width: 300px !important;
+}

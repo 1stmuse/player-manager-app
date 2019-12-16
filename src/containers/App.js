@@ -1,16 +1,16 @@
 import React from 'react';
 import GetStarted from './getstarted/GetStarted'
 import Homepage from './homepage/Homepage'
-import Header from '../components/header_footer/Header'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <GetStarted/>
-      <Homepage>
-        <Header/>
-      </Homepage>
-    </div>
+    <Router>
+      <div className="App">
+        <Route path='/'  exact component={GetStarted} />
+        <Route path='/home' component={Homepage} />
+      </div>
+    </Router>
   );
 }
 
