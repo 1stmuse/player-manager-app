@@ -4,37 +4,39 @@ import './PlayersForSale.css'
 
 
 
-const PlayersForSale = () => {
+const PlayersForSale = ({player}) => {
 
 
-
+    
 
     return (
         <div className='player_desc'>
-            <div>
-                <img src='' alt='image' />
+            <div className='text-center'>
+                <img src={`https://robohash.org/${player.id}?200x200`} alt='image' />
             </div>
-            <div>
-                <table className='table player_short_info'>
+            <div className='player_short_info'>
+                <table className='player_short_info_table'>
                     <tr>
                         <td>name</td>
-                        <td>____</td>
+                        <td>{player.name} </td>
                     </tr>
                     <tr>
-                        <td>club</td>
-                        <td>____</td>
+                        <td>nationality</td>
+                        <td>{player.nationality} </td>
                     </tr>
                     <tr>
                         <td>Position</td>
-                        <td>____</td>
+                        <td>{player.position} </td>
                     </tr>
                     <tr>
                         <td>Value</td>
-                        <td>____</td>
+                        <td>{player.value} </td>
                     </tr>
                 </table>
-                <button className='btn btn-primary'>Buy</button>
-                <button className='btn btn-danger'>Info</button>
+                <div className='buy_button'>
+                    <button className='btn-primary'>Buy</button>
+                    <button className='btn-danger butt'>Info</button>
+                </div>
             </div>
         </div>
     );

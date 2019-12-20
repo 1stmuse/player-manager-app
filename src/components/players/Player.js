@@ -1,14 +1,36 @@
 import React from 'react';
 
-const Player = ({name}) => {
+import './Player.css'
+
+const Player = ({player, onClick, onPlayerRemove}) => {
 
 
     return (
-        <div>
+        <div className='player_list'>
             <ul>
-                <li>{name} </li>
+                <li className='li_name'>{player.name} </li>
+                <li><button 
+                    onClick={()=>onClick(player)}
+                    className=' butt btn btn-success'
+                    >
+                    Info
+                    </button>
+                 </li>
+                 <li><button 
+                    onClick={()=>onPlayerRemove(player.id)}
+                    className=' butt btn btn-danger'
+                    >
+                    remove
+                    </button>
+                 </li>
+                 <li><button 
+                    onClick
+                    className=' butt btn btn-primary'
+                    >
+                    sell
+                    </button>
+                 </li>
             </ul>
-            <td><button className='btn btn-success'>Info</button></td>
         </div>
     );
 };

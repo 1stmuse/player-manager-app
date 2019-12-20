@@ -1,0 +1,25 @@
+.player_list{
+    /* display: flex; */
+    width: 400px;
+    margin-right: 0px;
+    margin-bottom: 15px;
+}
+
+ul{
+    display: inline-block;
+    width: inherit;
+    border: 1px solid blue;
+}
+
+li{
+    display: inline-block;
+}
+
+.li_name{
+    width: 150px;
+}
+button{
+    /* margin-left: 20px; */
+    padding: 0px 10px !important;
+    /* width: 50px; */
+}

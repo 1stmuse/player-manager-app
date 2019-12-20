@@ -10,20 +10,30 @@ import './MarketPlace.css'
 class MarketPlace extends Component {
 
 
-
+    
 
     render() {
+
+        const playersForSale =this.props.players.map(player=>(
+            <PlayersForSale key={player.id} player={player} />
+        ))
+
         return (
             <div>
                 <div>
                     <h2 className='text-center'>Available Player for sale</h2>
-                    <form className='form form-inline'>
+                    <div className='search'>
+                        <marquee direction='left'>ljnuhgurgurfhrufhifhifjhriehxebftvsfegudnuefhufh
+                            hrfbrufbrfhbrufhbrurnbhueuhfuehfuehhfuehfuefheufheufhufh
+                        </marquee>
+                        <form className='form form-inline right_form'>
                         <input type='search' placeholder='name or club'/>
                         <input type='button' className='btn btn-primary' value='search'/>
-                    </form>
+                        </form>
+                    </div>
                 </div>
                 <div className='players_for_sale'>
-                    <PlayersForSale/>
+                    {playersForSale}
                 </div>
                 {/* <di>
                     <PlayerInfo/>

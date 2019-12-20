@@ -12,24 +12,8 @@ class Header extends Component {
 
     state={
         drawerOpen:false,
-        headerShow:false
+        
     }
-
-    componentDidMount(){
-        window.addEventListener('scroll', this.handleScroll)
-    }
-
-    // handleScroll=()=>{
-    //     if(window.scrollY>0){
-    //         this.setState({
-    //             headerShow:true
-    //         })
-    //     }else{
-    //         this.setState({
-    //             headerShow:false
-    //         })
-    //     }
-    // }
 
 
     toggleDrawer=(value)=>{
@@ -49,9 +33,9 @@ class Header extends Component {
                 }}
             >
                 <ToolBar>
-                    <div className='header_logo'>
-                        <div className='font_righteous header_logo_venue'>The Venue </div>
-                        <div className='header_logo_title'>Musical Events</div>
+                    <div className='header_logo' style={{flexGrow:'1'}} >
+                        <div className='font_righteous header_logo_venue'>Player</div>
+                        <div className='header_logo_title'>Manager 2019</div>
                     </div>
 
 

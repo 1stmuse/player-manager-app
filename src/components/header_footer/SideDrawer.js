@@ -18,25 +18,19 @@ const SideDrawer = (props) => {
         >
 
             <List component='nav'>
-                <ListItem button onClick={()=>props.onClose(true)}>
+                <ListItem button onClick={()=>props.onClose(false)}>
+                    <Link to='/home'>Transfer Market</Link>
+                </ListItem>
+
+                <ListItem button onClick={()=>props.onClose(false)}>
                     <Link to='/home/team'>Team</Link>
                 </ListItem>
 
-                <ListItem button onClick={()=>console.log('venue')}>
-                    Venue INFO
+                <ListItem button onClick={()=>props.onClose(false)}>
+                    <Link to='/home/addPlayer'>Add Player</Link>
                 </ListItem>
 
-                <ListItem button onClick={()=>console.log('high')}>
-                    Highlight
-                </ListItem>
-
-                <ListItem button onClick={()=>console.log('price')}>
-                    Pricing
-                </ListItem>
-
-                <ListItem button onClick={()=>console.log('location')}>
-                    Location
-                </ListItem>
+            
             </List>
         </Drawer>
     );

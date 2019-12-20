@@ -3,44 +3,48 @@ import './playerInfo.css'
 
 
 
-const PlayerInfo = () => {
+const PlayerInfo = ({player}) => {
     return (
         <div className='player_info'>
-            <div>
+            <div className='head'>
                 <h4>Player Information</h4>
             </div>
-            <div>
+            <div className='img_div'>
                 <img src='' alt='image'/>
             </div>
             <div>
-               <table className='table'>
+               <table className='table info_table'>
                     <tr>
                         <td>Name</td>
-                        <td>______</td>
+                        <td>{player.name} </td>
                     </tr>
                     <tr>
-                        <td>Name</td>
-                        <td>______</td>
+                        <td>Nationality</td>
+                        <td>{player.nationality} </td>
                     </tr>
                     <tr>
-                        <td>Name</td>
-                        <td>______</td>
+                        <td>age</td>
+                        <td>{player.age} </td>
                     </tr>
                     <tr>
-                        <td>Name</td>
-                        <td>______</td>
+                        <td>position</td>
+                        <td>{player.position} </td>
                     </tr>
                     <tr>
-                        <td>Name</td>
-                        <td>______</td>
+                        <td>status</td>
+                        <td>{player.status} </td>
                     </tr>
                     <tr>
-                        <td>Name</td>
-                        <td>______</td>
+                        <td>value</td>
+                        <td>{player.value} </td>
                     </tr>
                     <tr>
-                        <td>Name</td>
-                        <td>______</td>
+                        <td>strength</td>
+                        <td>{player.strength} </td>
+                    </tr>
+                    <tr>
+                        <td>strong foot</td>
+                        <td>{player.strong_foot} </td>
                     </tr>
                </table>
             </div>

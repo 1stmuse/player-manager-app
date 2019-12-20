@@ -1,7 +1,8 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import GetStarted from './getstarted/GetStarted'
 import Homepage from './homepage/Homepage'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 function App() {
   return (
