@@ -2,8 +2,7 @@ import React from 'react';
 
 import './Player.css'
 
-const Player = ({player, onClick, onPlayerRemove}) => {
-
+const Player = ({player, onClick, onPlayerRemove, onPlayerSale, key}) => {
 
     return (
         <div className='player_list'>
@@ -24,7 +23,7 @@ const Player = ({player, onClick, onPlayerRemove}) => {
                     </button>
                  </li>
                  <li><button 
-                    onClick
+                    onClick={()=>onPlayerSale(player.id)}
                     className=' butt btn btn-primary'
                     >
                     sell

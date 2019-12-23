@@ -12,12 +12,13 @@ class Team extends Component {
         age:this.props.players[0].age,
         strength:this.props.players[0].strength,
         position:this.props.players[0].position,
-        status:this.props.players[0].status,
+        status:this.props.players[0].forSale? 'sold':'not sold',
         value:this.props.players[0].value,
         strong_foot:this.props.players[0].strong_foot,
     }
 
     infoClick=(player)=>{
+        // console.log(player)
         this.setState({
             id:player.id,
             name:player.name,
@@ -25,11 +26,15 @@ class Team extends Component {
             age:player.age,
             strength:player.strength,
             position:player.position,
-            status:player.status,
+            status:player.forSale?'sold': 'not sold',
             value:player.value,
             strong_foot:player.strong_foot
         })
     }
+
+
+
+
 
     render() {
         // console.log(this.props.players)
@@ -38,7 +43,8 @@ class Team extends Component {
                         player={player}    
                         key={player.id} 
                         onClick={this.infoClick}
-                        onPlayerRemove={this.props.onPlayerRemove}    
+                        onPlayerRemove={this.props.onPlayerRemove}  
+                        onPlayerSale={this.props.onPlayerSale}  
                     />
         })
         
@@ -56,6 +62,7 @@ class Team extends Component {
                         <PlayerInfo player={this.state} />
                     </div>
                 </div>
+                <p onClick={()=>this.props.onClick()} >{this.props.number} </p>
             </div>
             
         );

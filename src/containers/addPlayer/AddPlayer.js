@@ -5,7 +5,23 @@ import './AddPlayer.css'
 
 
 class AddPlayer extends Component {
+
+    // state={
+    //         id:'',
+    //         name:player.name,
+    //         nationality:player.nationality,
+    //         age:player.age,
+    //         strength:player.strength,
+    //         position:player.position,
+    //         status:player.status? 'sold' : 'not sold',
+    //         value:player.value,
+    //         strong_foot:player.strong_foot
+    // }
+
+
+
     render() {
+        console.log(this.props.players)
         return (
             <div className='container text-center'>
                 <div>

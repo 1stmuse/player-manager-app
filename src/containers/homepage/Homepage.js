@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import aux from '../../components/aux'
+import Aux from '../../components/aux'
 import Team from '../Team/Team'
 import AddPlayer from '../../containers/addPlayer/AddPlayer'
 import MarketPlace from '../../containers/marketPlace/MarketPlace'
@@ -18,13 +18,33 @@ class Homepage extends Component {
     }
 
     onPlayerRemove=(id)=>{
-        // console.log(id)
+        console.log(id)
         this.setState(prevState=>{
-            const removePlayer= prevState.players.filter(player=>{
-                return player.id !== id
-            })
+            const removePlayer= prevState.players.filter(player=>player.id !== id)
             return {
                 players:removePlayer
+            }
+        }) 
+
+
+        // or one can use the function below
+        // this.setState(
+        //      {
+        //         players:this.state.players.filter(player=>player.id !==id)
+        //     })
+            console.log(this.state.players)
+    }
+
+    onPlayerSale=(id)=>{
+        this.setState(prevState=>{
+            const updatePlayer=prevState.players.map(player=>{
+                if(player.id ===id){
+                 player.forSale =!player.forSale
+                }
+                return player
+            })
+            return{
+                players:updatePlayer
             }
         })
     }
@@ -34,7 +54,7 @@ class Homepage extends Component {
             <div>
                 <Header/>
                 <div className='home_page'>
-                    <aux players={this.state.players} >
+                    <Aux >
                     <Route path='/home' exact >
                         <MarketPlace players={this.state.players}/>    
                     </Route> 
@@ -44,10 +64,11 @@ class Homepage extends Component {
                     <Route path='/home/team'>
                         <Team 
                             players={this.state.players}
-                            onPlayerRemove={this.onPlayerRemove}    
+                            onPlayerRemove={this.onPlayerRemove}  
+                            onPlayerSale={this.onPlayerSale}  
                         />
                     </Route>
-                    </aux>
+                    </Aux>
                 </div>
                 <Footer/>
             </div>

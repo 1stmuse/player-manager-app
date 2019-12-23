@@ -4,6 +4,7 @@ import './playerInfo.css'
 
 
 const PlayerInfo = ({player}) => {
+    console.log(player)
     return (
         <div className='player_info'>
             <div className='head'>
