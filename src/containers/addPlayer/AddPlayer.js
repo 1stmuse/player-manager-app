@@ -6,59 +6,75 @@ import './AddPlayer.css'
 
 class AddPlayer extends Component {
 
-    // state={
-    //         id:'',
-    //         name:player.name,
-    //         nationality:player.nationality,
-    //         age:player.age,
-    //         strength:player.strength,
-    //         position:player.position,
-    //         status:player.status? 'sold' : 'not sold',
-    //         value:player.value,
-    //         strong_foot:player.strong_foot
-    // }
+    state={
+            id:'',
+            name:'',
+            nationality:'',
+            age:'',
+            strength:'',
+            position:'',
+            value:'',
+            strong_foot:'',
+            club:''
+    }
 
+
+    onHandleChange=(event)=>{
+        const {name, value} = event.target
+        this.setState({
+            [name]:value
+        })
+    }
+
+    createPlayer=(event)=>{
+        event.preventDefault()
+        this.props.createPlayer(this.state)
+    }
 
 
     render() {
-        console.log(this.props.players)
+        // console.log(this.props.players)
         return (
             <div className='container text-center'>
                 <div>
                     <h2>Add New Player</h2>
                 </div>
                 <div className='big_form'>
-                    <form className='form form-group main_form' method='POST'>
+                    <form className='form form-group main_form'>
                         <div className='row main_row'>
                             <p>name</p>
-                            <input type='text' className='text'/>
+                            <input type='text' className='text' name='name' value={this.state.name} onChange={this.onHandleChange} />
                         </div>
                         <div className='row main_row'>
                             <p>nationality</p>
-                            <input type='text' className='text'/>
+                            <input type='text' className='text' name='nationality' value={this.state.nationality} onChange={this.onHandleChange} />
                         </div>
                         <div className='row main_row'>
                             <p>club</p>
-                            <input type='text' className='text'/>
+                            <input type='text' className='text' name='club' value={this.state.club} onChange={this.onHandleChange} />
                         </div>
                         <div className='row main_row'>
                             <p>age</p>
-                            <input type='text' className='text'/>
+                            <input type='text' className='text' name='age' value={this.state.age} onChange={this.onHandleChange} />
                         </div>
                         <div className='row main_row'>
                             <p>position</p>
-                            <input type='text' className='text'/>
+                            <input type='text' className='text' name='position' value={this.state.position} onChange={this.onHandleChange} />
                         </div>
                         <div className='row main_row'>
                             <p>strength</p>
-                            <input type='text' className='text'/>
+                            <input type='text' className='text' name='strength' value={this.state.strength} onChange={this.onHandleChange} />
                         </div>
                         <div className='row main_row'>
-                            <p>height</p>
-                            <input type='text' className='text'/>
+                            <p>value</p>
+                            <input type='text' className='text' name='value' value={this.state.value} onChange={this.onHandleChange} />
+                        </div>
+                        <div className='row main_row'>
+                            <p>strong foot</p>
+                            <input type='text' className='text' name='strong_foot' value={this.state.strong_foot} onChange={this.onHandleChange} />
                         </div>
                         <div>
-                        <input type='submit' className='btn btn-primary pl-5 pr-5 mb-5 mt-3' value='Add Player'/>
+                        <input type='submit' className='btn btn-primary pl-5 pr-5 mb-5 mt-3' value='Add Player' onClick={this.createPlayer} />
                         </div>
                     </form>
                 </div>

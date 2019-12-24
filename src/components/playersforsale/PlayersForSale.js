@@ -4,7 +4,7 @@ import './PlayersForSale.css'
 
 
 
-const PlayersForSale = ({player}) => {
+const PlayersForSale = ({player, info}) => {
 
 
     
@@ -35,7 +35,7 @@ const PlayersForSale = ({player}) => {
                 </table>
                 <div className='buy_button'>
                     <button className='btn-primary'>Buy</button>
-                    <button className='btn-danger butt'>Info</button>
+                    <button className='btn-danger butt' onClick={()=>info(player.id)} >Info</button>
                 </div>
             </div>
         </div>

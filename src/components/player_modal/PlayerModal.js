@@ -1,19 +1,16 @@
 import React from 'react';
-import './playerInfo.css'
+import './Modal.css'
 
 
 
-const PlayerInfo = ({player}) => {
+const PlayerModal = ({player, hideModal}) => {
     return (
-        <div className='player_info'>
-            <div className='head'>
-                <h4>Player Information</h4>
-            </div>
+        <div className='player_modal_info'>
             <div className='img_div'>
-                <img src='' alt='image'/>
+                <img src={`https://robohash.org/${player.id}?200x200`} alt='image'/>
             </div>
             <div>
-               <table className='table info_table'>
+               <table className='table info_modal_table'>
                     <tr>
                         <td>Name</td>
                         <td>{player.name} </td>
@@ -31,10 +28,6 @@ const PlayerInfo = ({player}) => {
                         <td>{player.position} </td>
                     </tr>
                     <tr>
-                        <td>status</td>
-                        <td>{player.status?'sold':'not sold'} </td>
-                    </tr>
-                    <tr>
                         <td>value</td>
                         <td>{player.value} </td>
                     </tr>
@@ -47,9 +40,10 @@ const PlayerInfo = ({player}) => {
                         <td>{player.strong_foot} </td>
                     </tr>
                </table>
+               <div className='but_div' ><button className='btn btn-danger bott' onClick={hideModal}>close</button></div>
             </div>
         </div>
     );
 };
 
-export default PlayerInfo;
+export default PlayerModal;

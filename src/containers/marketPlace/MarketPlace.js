@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlayersForSale from '../../components/playersforsale/PlayersForSale'
-import PlayerInfo from '../../components/playerInfo/PlayerInfo'
+import PlayerModal from '../../components/player_modal/PlayerModal'
+import Modal from '../../components/player_modal/Modal'
 
 import './MarketPlace.css'
 
@@ -9,13 +10,49 @@ import './MarketPlace.css'
 
 class MarketPlace extends Component {
 
+    state={
+        id:'',
+        name:'',
+        nationality:'',
+        age:'',
+        strength:'',
+        position:'',
+        status:'',
+        value:'',
+        strong_foot:'',
+        show:false
+    }
 
+    info=(id)=>{
+        this.props.players.map(player=>{
+            if(player.id==id){
+                this.setState({
+                    id:player.id,
+                    name:player.name,
+                    nationality:player.nationality,
+                    age:player.age,
+                    strength:player.strength,
+                    position:player.position,
+                    status:player.status,
+                    value:player.value,
+                    strong_foot:player.strong_foot,
+                    show:true
+                })
+            }
+        })
+
+    }
+
+    
+      hideModal = () => {
+        this.setState({ show: false });
+      };
     
 
     render() {
 
         const playersForSale =this.props.players.map(player=>(
-            <PlayersForSale key={player.id} player={player} />
+            <PlayersForSale key={player.id} player={player} info={this.info} />
         ))
 
         return (
@@ -23,9 +60,6 @@ class MarketPlace extends Component {
                 <div>
                     <h2 className='text-center'>Available Player for sale</h2>
                     <div className='search'>
-                        <marquee direction='left'>ljnuhgurgurfhrufhifhifjhriehxebftvsfegudnuefhufh
-                            hrfbrufbrfhbrufhbrurnbhueuhfuehfuehhfuehfuefheufheufhufh
-                        </marquee>
                         <form className='form form-inline right_form'>
                         <input type='search' placeholder='name or club'/>
                         <input type='button' className='btn btn-primary' value='search'/>
@@ -35,9 +69,11 @@ class MarketPlace extends Component {
                 <div className='players_for_sale'>
                     {playersForSale}
                 </div>
-                {/* <di>
-                    <PlayerInfo/>
-                </di> */}
+                <di>
+                    <Modal hideModal={this.hideModal} show={this.state.show} >
+                        <PlayerModal player={this.state} hideModal={this.hideModal} />
+                    </Modal>
+                </di>
             </div>
         );
     }

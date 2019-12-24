@@ -17,6 +17,10 @@ class Homepage extends Component {
         players:Players
     }
 
+    componentDidUpdate(){
+        console.log(this.state.players)
+    }
+
     onPlayerRemove=(id)=>{
         console.log(id)
         this.setState(prevState=>{
@@ -25,29 +29,45 @@ class Homepage extends Component {
                 players:removePlayer
             }
         }) 
-
-
-        // or one can use the function below
-        // this.setState(
-        //      {
-        //         players:this.state.players.filter(player=>player.id !==id)
-        //     })
             console.log(this.state.players)
     }
 
     onPlayerSale=(id)=>{
         this.setState(prevState=>{
-            const updatePlayer=prevState.players.map(player=>{
-                if(player.id ===id){
-                 player.forSale =!player.forSale
-                }
-                return player
-            })
-            return{
-                players:updatePlayer
+          let tod =prevState.players.map(player=>{
+            //check if the id corresponds to the player id
+            if(player.id===id){
+              player.forSale=!player.forSale
+              console.log(player)
             }
+          })
+          // return the updated state
+          return{
+            prevState:tod
+          }
         })
-    }
+        console.log('button clicked', id)
+      }
+
+      createPlayer=(player)=>{
+        //   console.log(player)
+          const newPlayer={
+              id:Math.floor(Math.random() + this.state.players.length),
+              forSale:false,
+              name:player.name,
+              age:player.age,
+              nationality:player.nationality,
+              strength:player.strength,
+              value:player.value,
+              club:player.club,
+              strong_foot:player.strong_foot,
+              position:player.position
+          }
+          this.setState({
+              players:[ {...newPlayer}, ...this.state.players]
+          })
+      }
+
 
     render() {
         return (
@@ -59,7 +79,7 @@ class Homepage extends Component {
                         <MarketPlace players={this.state.players}/>    
                     </Route> 
                     <Route path='/home/addPlayer'>
-                        <AddPlayer players={this.state.players} />
+                        <AddPlayer players={this.state.players} createPlayer={this.createPlayer} />
                     </Route>
                     <Route path='/home/team'>
                         <Team 

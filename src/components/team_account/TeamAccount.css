@@ -1,0 +1,10 @@
+
+.account{
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    background-color: slategrey;
+    text-align: center;
+}

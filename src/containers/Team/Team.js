@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PlayerInfo from '../../components/playerInfo/PlayerInfo'
+import TeamAccount from '../../components/team_account/TeamAccount'
 import Player from '.././../components/players/Player'
 import './Team.css'
+
 
 class Team extends Component {
 
@@ -12,9 +14,10 @@ class Team extends Component {
         age:this.props.players[0].age,
         strength:this.props.players[0].strength,
         position:this.props.players[0].position,
-        status:this.props.players[0].forSale? 'sold':'not sold',
+        status:this.props.players[0].forSale,
         value:this.props.players[0].value,
         strong_foot:this.props.players[0].strong_foot,
+        balance:'$4,500,000'
     }
 
     infoClick=(player)=>{
@@ -26,7 +29,7 @@ class Team extends Component {
             age:player.age,
             strength:player.strength,
             position:player.position,
-            status:player.forSale?'sold': 'not sold',
+            status:player.forSale,
             value:player.value,
             strong_foot:player.strong_foot
         })
@@ -37,7 +40,7 @@ class Team extends Component {
 
 
     render() {
-        // console.log(this.props.players)
+        console.log(this.state.status)
         const players= this.props.players.map(player=>{
             return <Player 
                         player={player}    
@@ -54,6 +57,7 @@ class Team extends Component {
                 <div className='text-center'>
                     <h3>Arsenal Football Club</h3>
                 </div>
+                <div><TeamAccount balance={this.state.balance} /></div>
                 <div className='contain_div'>
                     <div>
                         {players}
@@ -62,7 +66,6 @@ class Team extends Component {
                         <PlayerInfo player={this.state} />
                     </div>
                 </div>
-                <p onClick={()=>this.props.onClick()} >{this.props.number} </p>
             </div>
             
         );
