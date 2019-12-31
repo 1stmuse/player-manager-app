@@ -27,8 +27,19 @@ class AddPlayer extends Component {
     }
 
     createPlayer=(event)=>{
-        event.preventDefault()
-        this.props.createPlayer(this.state)
+        event.preventDefault();
+        this.props.createPlayer(this.state);
+        this.setState({
+            id:'',
+            name:'',
+            nationality:'',
+            age:'',
+            strength:'',
+            position:'',
+            value:'',
+            strong_foot:'',
+            club:''
+        })
     }
 
 

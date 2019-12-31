@@ -50,9 +50,9 @@ class Homepage extends Component {
       }
 
       createPlayer=(player)=>{
-        //   console.log(player)
+          console.log(player)
           const newPlayer={
-              id:Math.floor(Math.random() + this.state.players.length),
+              id:Math.floor(Math.random() + this.state.players.length + 1),
               forSale:false,
               name:player.name,
               age:player.age,
