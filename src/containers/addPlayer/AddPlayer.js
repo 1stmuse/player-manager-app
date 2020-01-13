@@ -7,7 +7,6 @@ import './AddPlayer.css'
 class AddPlayer extends Component {
 
     state={
-            id:'',
             name:'',
             nationality:'',
             age:'',
@@ -28,9 +27,14 @@ class AddPlayer extends Component {
 
     createPlayer=(event)=>{
         event.preventDefault();
-        this.props.createPlayer(this.state);
+        fetch('http://localhost:5000/players/addPlayer', {
+            method: 'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(this.state)
+        })
+            .then(res=>res.json())
+            .then(data=>console.log(data))
         this.setState({
-            id:'',
             name:'',
             nationality:'',
             age:'',

@@ -12,7 +12,7 @@ const PlayersForSale = ({player, info}) => {
     return (
         <div className='player_desc'>
             <div className='text-center'>
-                <img src={`https://robohash.org/${player.id}?200x200`} alt='image' />
+                <img src={`https://robohash.org/${player._id}?200x200`} alt='image' />
             </div>
             <div className='player_short_info'>
                 <table className='player_short_info_table'>
@@ -35,7 +35,7 @@ const PlayersForSale = ({player, info}) => {
                 </table>
                 <div className='buy_button'>
                     <button className='btn-primary'>Buy</button>
-                    <button className='btn-danger butt' onClick={()=>info(player.id)} >Info</button>
+                    <button className='btn-danger butt' onClick={()=>info(player._id)} >Info</button>
                 </div>
             </div>
         </div>

@@ -8,21 +8,29 @@ import './Team.css'
 class Team extends Component {
 
     state={
-        id:this.props.players[0].id,
-        name:this.props.players[0].name,
-        nationality:this.props.players[0].nationality,
-        age:this.props.players[0].age,
-        strength:this.props.players[0].strength,
-        position:this.props.players[0].position,
-        status:this.props.players[0].forSale,
-        value:this.props.players[0].value,
-        strong_foot:this.props.players[0].strong_foot,
+        playerView:{
+            id:this.props.players[0]._id,
+            name:this.props.players[0].name,
+            nationality:this.props.players[0].nationality,
+            age:this.props.players[0].age,
+            strength:this.props.players[0].strength,
+            position:this.props.players[0].position,
+            status:this.props.players[0].forSale,
+            value:this.props.players[0].value,
+            strong_foot:this.props.players[0].strong_foot
+        },
+        user:{
+            name:this.props.user.name,
+            password:this.props.password,
+            email:this.props.email
+        },
         balance:'$4,500,000'
     }
 
     infoClick=(player)=>{
         // console.log(player)
         this.setState({
+           playerView:{
             id:player.id,
             name:player.name,
             nationality:player.nationality,
@@ -32,6 +40,7 @@ class Team extends Component {
             status:player.forSale,
             value:player.value,
             strong_foot:player.strong_foot
+           }
         })
     }
 
@@ -40,7 +49,7 @@ class Team extends Component {
 
 
     render() {
-        console.log(this.state.status)
+        // console.log(this.state.status)
         const players= this.props.players.map(player=>{
             return <Player 
                         player={player}    
@@ -63,7 +72,7 @@ class Team extends Component {
                         {players}
                     </div>
                     <div>
-                        <PlayerInfo player={this.state} />
+                        <PlayerInfo player={this.state.playerView} />
                     </div>
                 </div>
             </div>

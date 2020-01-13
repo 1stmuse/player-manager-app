@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Player.css'
 
-const Player = ({player, onClick, onPlayerRemove, onPlayerSale, key}) => {
+const Player = ({player, onClick, onPlayerRemove, onPlayerSale}) => {
 
     return (
         <div className='player_list'>
@@ -16,14 +16,14 @@ const Player = ({player, onClick, onPlayerRemove, onPlayerSale, key}) => {
                     </button>
                  </li>
                  <li><button 
-                    onClick={()=>onPlayerRemove(player.id)}
+                    onClick={()=>onPlayerRemove(player._id)}
                     className=' butt btn btn-danger'
                     >
                     remove
                     </button>
                  </li>
                  <li><button 
-                    onClick={()=>onPlayerSale(player.id)}
+                    onClick={()=>onPlayerSale(player._id)}
                     className=' butt btn btn-primary'
                     >
                     sell

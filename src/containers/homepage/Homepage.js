@@ -14,17 +14,22 @@ import './HomePage.css'
 
 class Homepage extends Component {
     state={
-        players:Players
+        players:[]
     }
 
-    componentDidUpdate(){
-        console.log(this.state.players)
+    componentDidMount(){
+        // console.log(this.state.players)
+        fetch('http://localhost:5000/players/')
+            .then(res=> res.json())
+            .then(data=> this.setState({
+                players: data
+            }))
     }
 
     onPlayerRemove=(id)=>{
         console.log(id)
         this.setState(prevState=>{
-            const removePlayer= prevState.players.filter(player=>player.id !== id)
+            const removePlayer= prevState.players.filter(player=>player._id !== id)
             return {
                 players:removePlayer
             }
@@ -49,27 +54,10 @@ class Homepage extends Component {
         console.log('button clicked', id)
       }
 
-      createPlayer=(player)=>{
-          console.log(player)
-          const newPlayer={
-              id:Math.floor(Math.random() + this.state.players.length + 1),
-              forSale:false,
-              name:player.name,
-              age:player.age,
-              nationality:player.nationality,
-              strength:player.strength,
-              value:player.value,
-              club:player.club,
-              strong_foot:player.strong_foot,
-              position:player.position
-          }
-          this.setState({
-              players:[ {...newPlayer}, ...this.state.players]
-          })
-      }
 
 
     render() {
+        console.log(this.state.players)
         return (
             <div>
                 <Header/>
@@ -79,13 +67,14 @@ class Homepage extends Component {
                         <MarketPlace players={this.state.players}/>    
                     </Route> 
                     <Route path='/home/addPlayer'>
-                        <AddPlayer players={this.state.players} createPlayer={this.createPlayer} />
+                        <AddPlayer />
                     </Route>
                     <Route path='/home/team'>
                         <Team 
                             players={this.state.players}
                             onPlayerRemove={this.onPlayerRemove}  
                             onPlayerSale={this.onPlayerSale}  
+                            user={this.props.user}
                         />
                     </Route>
                     </Aux>

@@ -4,7 +4,6 @@ import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import {Link} from 'react-router-dom'
-// import {scroller} from 'react-scroll'
 
 const SideDrawer = (props) => {
 

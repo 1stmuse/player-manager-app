@@ -6,7 +6,7 @@ const playerSchema= new Schema({
     name: {type:String , required:true},
     nationality: {type:String , required:true},
     age: {type:Number , required:true},
-    String:{type:Number , required:true},
+    strength:{type:Number , required:true},
     position: {type:String , required:true},
     value: {type:Number , required:true},
     strong_foot: {type:String , required:true},
