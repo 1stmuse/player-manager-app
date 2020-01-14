@@ -22,15 +22,12 @@ class GetStarted extends Component {
     }
 
     render() {
-        const applystyle=this.state.signUp
+        
 
-        const style={
-            // opacity:'1',
-            // transition:'opacity 0.5s ease-in-out',
-            shadow:'10px 10px 10px 10'
-        }
-
-        const slide= this.state.signUp? <Login style={style} apply={applystyle} /> : <Register style={style}/>
+        const slide= this.state.signUp?
+             <Login loadUser={this.props.loadUser} /> 
+            :
+             <Register loadUser={this.props.loadUser} />
 
         return (
             <div className='container-fluid whole_div'>

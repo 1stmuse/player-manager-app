@@ -23,7 +23,7 @@ function App() {
     <Router>
       <div className="App">
         <Route path='/'  exact >
-          <GetStarted/>
+          <GetStarted LoadUser={LoadUser} />
         </Route>
         <Route path='/home' >
           <Homepage user={user} />

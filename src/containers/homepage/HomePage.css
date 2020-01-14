@@ -1,3 +1,29 @@
 .home_page{
+    /* width: 800px; */
+    /* margin: 0 auto; */
     margin-top: 100px;
+    /* height: 600px; */
 }
+
+.spin{
+    text-align: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 5px solid black;
+    border-bottom-color: blanchedalmond;
+    animation: spin 0.6s infinite linear ;
+  }
+  
+  @keyframes spin{
+    from{
+      transform: rotate(0deg);
+    }
+    to{
+      transform: rotate(360deg);
+    }
+  }
+  
+  .spinner{
+    margin: 90px 50%;
+  }

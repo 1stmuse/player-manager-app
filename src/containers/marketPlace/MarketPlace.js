@@ -25,9 +25,9 @@ class MarketPlace extends Component {
 
     info=(id)=>{
         this.props.players.map(player=>{
-            if(player.id==id){
+            if(player._id==id){
                 this.setState({
-                    id:player.id,
+                    id:player._id,
                     name:player.name,
                     nationality:player.nationality,
                     age:player.age,
@@ -51,8 +51,8 @@ class MarketPlace extends Component {
 
     render() {
 
-        const playersForSale =this.props.players.map(player=>(
-            <PlayersForSale key={player.id} player={player} info={this.info} />
+        const playersForSale = this.props.players.map(player=>(
+            <PlayersForSale key={player._id} player={player} info={this.info} />
         ))
 
         return (

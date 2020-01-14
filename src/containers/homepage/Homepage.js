@@ -6,7 +6,6 @@ import MarketPlace from '../../containers/marketPlace/MarketPlace'
 import Header from '../../components/header_footer/Header'
 import Footer from '../../components/header_footer/Footer'
 import {Route} from 'react-router-dom'
-import Players from '../../components/data/playerData'
 
 import './HomePage.css'
 
@@ -14,7 +13,8 @@ import './HomePage.css'
 
 class Homepage extends Component {
     state={
-        players:[]
+        players:[],
+        loading: true
     }
 
     componentDidMount(){
@@ -22,7 +22,8 @@ class Homepage extends Component {
         fetch('http://localhost:5000/players/')
             .then(res=> res.json())
             .then(data=> this.setState({
-                players: data
+                players: data,
+                loading: false
             }))
     }
 
@@ -62,7 +63,11 @@ class Homepage extends Component {
             <div>
                 <Header/>
                 <div className='home_page'>
-                    <Aux >
+                    {this.state.loading? <div className='spinner'>
+                        <div className='spin'></div>
+                        <div>LOADING</div>
+                    </div> 
+                    : <Aux >
                     <Route path='/home' exact >
                         <MarketPlace players={this.state.players}/>    
                     </Route> 
@@ -77,7 +82,9 @@ class Homepage extends Component {
                             user={this.props.user}
                         />
                     </Route>
-                    </Aux>
+                </Aux> }
+                    
+                   
                 </div>
                 <Footer/>
             </div>
