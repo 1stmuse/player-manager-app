@@ -25,13 +25,17 @@ class Register extends React.Component {
 
     handleSubmit=(event)=>{
      //     event.preventDefault()
-          fetch('http://localhost:5000/managers/addManager', {
+          fetch('http://localhost:5000/managers/register', {
                method: 'POST',
                headers:{'Content-Type':'application/json'},
                body: JSON.stringify(this.state)
           })
          .then(res=>res.json())
-          . then(data=> alert(data))
+          . then(data=>{
+               if(data){
+                    this.props.loadUser(data)
+               }
+          } )
 
           this.setState({
                name:'',

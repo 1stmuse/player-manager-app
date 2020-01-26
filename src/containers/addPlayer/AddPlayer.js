@@ -27,13 +27,15 @@ class AddPlayer extends Component {
 
     createPlayer=(event)=>{
         event.preventDefault();
-        fetch('http://localhost:5000/players/addPlayer', {
-            method: 'POST',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(this.state)
-        })
-            .then(res=>res.json())
-            .then(data=>console.log(data))
+        const player=this.state
+        this.props.addPlayer(player)
+        // fetch('http://localhost:5000/players/addPlayer', {
+        //     method: 'POST',
+        //     headers:{'Content-Type':'application/json'},
+        //     body: JSON.stringify(this.state)
+        // })
+        //     .then(res=>res.json())
+        //     .then(data=>console.log(data))
         this.setState({
             name:'',
             nationality:'',

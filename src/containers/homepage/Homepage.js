@@ -14,17 +14,25 @@ import './HomePage.css'
 class Homepage extends Component {
     state={
         players:[],
-        loading: true
+        loading: true,
+        forSale:true,
+        searchTerm:''
     }
 
     componentDidMount(){
         // console.log(this.state.players)
         fetch('http://localhost:5000/players/')
-            .then(res=> res.json())
-            .then(data=> this.setState({
-                players: data,
-                loading: false
+        // ,{
+        //     method:'POST',
+        //     headers:{'Content-Type':'application/json'},
+        //     body: JSON.stringify(this.state)
+        // })
+            .then(res=>res.json())
+            .then(data=>this.setState({
+                players:data,
+                loading:false
             }))
+            console.log('component has mounted')
     }
 
     onPlayerRemove=(id)=>{
@@ -39,40 +47,65 @@ class Homepage extends Component {
     }
 
     onPlayerSale=(id)=>{
-        this.setState(prevState=>{
-          let tod =prevState.players.map(player=>{
-            //check if the id corresponds to the player id
-            if(player.id===id){
-              player.forSale=!player.forSale
-              console.log(player)
-            }
-          })
-          // return the updated state
-          return{
-            prevState:tod
-          }
+
+        fetch('http://localhost:5000/players/addPlayer', {
+            method: 'UPDATE',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(id)
         })
-        console.log('button clicked', id)
+            .then(res=> res.json())
+            .then(data=> this.setState({
+                players:[...this.state.players,{data}]
+            }))
+
+
+        // this.setState(prevState=>{
+        //   let tod =prevState.players.map(player=>{
+        //     if(player.id===id){
+        //       player.forSale=!player.forSale
+        //       console.log(player)
+        //     }
+        //   })
+        //   return{
+        //     prevState:tod
+        //   }
+        // })
       }
 
+    addPlayer=(player)=>{
+        // console.log(player)
+         fetch('http://localhost:5000/players/addPlayer', {
+            method: 'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(player)
+        })
+            .then(res=>res.json())
+      }
 
+      onSearch=(searchTerm)=>{
+        this.setState({searchTerm})
+      }
 
     render() {
-        console.log(this.state.players)
+        // console.log(this.state.players)
+        const {players,searchTerm}= this.state;
+        const filteredPlayers=players.filter(player=>{
+            return player.name.toLowerCase().includes(searchTerm.toLowerCase()) || player.club.toLowerCase().includes(searchTerm.toLowerCase())
+        })
         return (
             <div>
                 <Header/>
                 <div className='home_page'>
-                    {this.state.loading? <div className='spinner'>
-                        <div className='spin'></div>
-                        <div>LOADING</div>
-                    </div> 
-                    : <Aux >
+                     <Aux >
                     <Route path='/home' exact >
-                        <MarketPlace players={this.state.players}/>    
+                        {this.state.loading? <div className='spinner'>
+                            <div className='spin'></div>
+                            <div>LOADING</div>
+                        </div> :
+                        <MarketPlace players={filteredPlayers} onSearch={this.onSearch} />  }  
                     </Route> 
                     <Route path='/home/addPlayer'>
-                        <AddPlayer />
+                        <AddPlayer addPlayer={this.addPlayer} />
                     </Route>
                     <Route path='/home/team'>
                         <Team 
@@ -82,7 +115,7 @@ class Homepage extends Component {
                             user={this.props.user}
                         />
                     </Route>
-                </Aux> }
+                </Aux>
                     
                    
                 </div>
@@ -94,3 +127,4 @@ class Homepage extends Component {
 }
 
 export default Homepage;
+

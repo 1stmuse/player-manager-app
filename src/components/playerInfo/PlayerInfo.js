@@ -10,7 +10,7 @@ const PlayerInfo = ({player}) => {
                 <h4>Player Information</h4>
             </div>
             <div className='img_div'>
-                <img src='' alt='image'/>
+                <img src={`https://robohash.org/${player.id}?200x200`} alt='image'/>
             </div>
             <div>
                <table className='table info_table'>

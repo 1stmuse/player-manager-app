@@ -8,14 +8,16 @@ function App() {
   const [user, setUser]= useState({
     name:'',
     password:'',
-    email:''
+    email:'',
+    id:''
   })
 
   const LoadUser=(user)=>{
     setUser({
       name:user.name,
       password:user.password,
-      email:user.email
+      email:user.email,
+      id:user._id
     })
   }
 
@@ -23,7 +25,7 @@ function App() {
     <Router>
       <div className="App">
         <Route path='/'  exact >
-          <GetStarted LoadUser={LoadUser} />
+          <GetStarted loadUser={LoadUser} />
         </Route>
         <Route path='/home' >
           <Homepage user={user} />

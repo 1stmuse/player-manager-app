@@ -36,11 +36,17 @@ class MarketPlace extends Component {
                     status:player.status,
                     value:player.value,
                     strong_foot:player.strong_foot,
-                    show:true
+                    show:true,
+                    searchTerm:''
                 })
             }
         })
 
+    }
+
+    onSearch=(event)=>{
+        this.setState({searchTerm:event.target.value})
+        this.props.onSearch(this.state.searchTerm)
     }
 
     
@@ -62,7 +68,7 @@ class MarketPlace extends Component {
                     <div className='search'>
                         <form className='form form-inline right_form'>
                         <input type='search' placeholder='name or club'/>
-                        <input type='button' className='btn btn-primary' value='search'/>
+                        <input type='button' className='btn btn-primary' value='search' onChange={this.onSearch} />
                         </form>
                     </div>
                 </div>

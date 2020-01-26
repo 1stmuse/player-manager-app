@@ -66,7 +66,10 @@ class Team extends Component {
                 <div className='text-center'>
                     <h3>Arsenal Football Club</h3>
                 </div>
-                <div><TeamAccount balance={this.state.balance} /></div>
+                <div>
+                    <div>{this.state.user.name} </div>
+                    <TeamAccount balance={this.state.balance} />
+                </div>
                 <div className='contain_div'>
                     <div>
                         {players}
