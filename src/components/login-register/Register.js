@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter} from 'react-router-dom'
 import './Login.css'
 
 
@@ -11,7 +12,8 @@ class Register extends React.Component {
               email:'',
               username:'',
               club:'',
-              password:''
+              password:'',
+              enter: true
          }
     }
 
@@ -24,18 +26,19 @@ class Register extends React.Component {
     }
 
     handleSubmit=(event)=>{
-     //     event.preventDefault()
-          fetch('http://localhost:5000/managers/register', {
-               method: 'POST',
-               headers:{'Content-Type':'application/json'},
-               body: JSON.stringify(this.state)
-          })
-         .then(res=>res.json())
-          . then(data=>{
-               if(data){
-                    this.props.loadUser(data)
-               }
-          } )
+         
+               fetch('http://localhost:5000/managers/register', {
+                    method: 'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify(this.state)
+               })
+              .then(res=>res.json())
+               . then(data=>{
+                    if(data){
+                         this.props.loadUser(data)
+                         this.props.history.push('/home/team')
+                    }
+               } )
 
           this.setState({
                name:'',
@@ -77,4 +80,4 @@ class Register extends React.Component {
     }
 };
 
-export default Register;
+export default withRouter(Register);

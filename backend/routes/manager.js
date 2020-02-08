@@ -15,17 +15,18 @@ router.route('/register').post((req,res)=>{
 
     const newManager= new Manager(ManagerInfo)
     newManager.save()
-        .then(()=> res.json('manager added'))
+        .then(()=> res.json(newManager))
         .catch(err=> res.status(404).json('error' + err))
 })
 
 router.route('/login').post((req,res)=>{
     const loginInfo={
         email:req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        username: req.body.username
     }
-    Manager.find({email:loginInfo.email} &&{password:loginInfo.password})
-        .then(manager=> res.json(manager))
+    Manager.find(({email:loginInfo.email} || {username:loginInfo.username}) &&{password:loginInfo.password})
+        .then(manager=> res.json('loged in'))
         .catch(err=> res.status(404).json('error'+ err))
 })
 

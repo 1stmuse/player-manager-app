@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { withRouter} from 'react-router-dom'
 import './AddPlayer.css'
 
 
@@ -28,14 +28,20 @@ class AddPlayer extends Component {
     createPlayer=(event)=>{
         event.preventDefault();
         const player=this.state
-        this.props.addPlayer(player)
-        // fetch('http://localhost:5000/players/addPlayer', {
-        //     method: 'POST',
-        //     headers:{'Content-Type':'application/json'},
-        //     body: JSON.stringify(this.state)
-        // })
-        //     .then(res=>res.json())
-        //     .then(data=>console.log(data))
+        // this.props.addPlayer(player)
+        fetch('http://localhost:2000/players/addPlayer', {
+            method: 'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(this.state)
+        })
+            .then(res=>res.json())
+            .then(data=>{
+                if(data){
+                    alert('player added')
+                    this.props.addPlayer(data)
+                    this.props.history.push('/home/team')
+                }
+            })
         this.setState({
             name:'',
             nationality:'',
@@ -101,4 +107,4 @@ class AddPlayer extends Component {
     }
 }
 
-export default AddPlayer;
+export default withRouter(AddPlayer);

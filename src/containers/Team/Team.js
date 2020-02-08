@@ -8,30 +8,95 @@ import './Team.css'
 class Team extends Component {
 
     state={
+        players:[],
         playerView:{
-            id:this.props.players[0]._id,
-            name:this.props.players[0].name,
-            nationality:this.props.players[0].nationality,
-            age:this.props.players[0].age,
-            strength:this.props.players[0].strength,
-            position:this.props.players[0].position,
-            status:this.props.players[0].forSale,
-            value:this.props.players[0].value,
-            strong_foot:this.props.players[0].strong_foot
+            id:'',
+            name:'',
+            nationality:'',
+            age:'',
+            strength:'',
+            position:'',
+            status:'',
+            value:'',
+            strong_foot:''
         },
         user:{
-            name:this.props.user.name,
-            password:this.props.password,
-            email:this.props.email
+            name:'',
+            password:'',
+            email:''
         },
         balance:'$4,500,000'
     }
+
+
+    componentDidMount(){
+        // console.log(this.state.players)
+        // fetch('http://localhost:2000/players/') 
+        //     .then(res=>res.json())
+        //     .then(data=>{
+        //         const {_id,name,nationality,age,strength,position,status,value,strong_foot}=data[0];
+        //         this.setState({
+        //             players:data,
+        //             playerView:{
+        //                 id:_id,name,nationality,age,strength,position,status,value,strong_foot
+        //             }
+        //         })
+        //     })
+        //     console.log('component has mounted')
+
+        // const {_id,name,nationality,age,strength,position,status,value,strong_foot}=this.props.players[0]
+        // console.log(this.state.players)
+        console.log('component did mount')
+            this.setState({
+                players:this.props.players,
+            })
+    }
+
+    componentWillMount() {
+        console.log('component will mount')
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        // localStorage.setItem('players', JSON.stringify(nextState.players))
+        console.log('component will update')
+    }
+    
+
+
+    addPlayer=(data)=>{
+        this.setState({
+            players:[...this.state.players, {data}]
+        })
+    }
+
+    // onPlayerRemove=(id)=>{
+    //     console.log(id)
+    //     this.setState(prevState=>{
+    //         const removePlayer= prevState.players.filter(player=>player._id !== id)
+    //         return {
+    //             players:removePlayer
+    //         }
+    //     }) 
+    //         console.log(this.state.players)
+    // }
+
+    // addPlayer=(player)=>{
+    //      fetch('http://localhost:5000/players/addPlayer', {
+    //         method: 'POST',
+    //         headers:{'Content-Type':'application/json'},
+    //         body: JSON.stringify(player)
+    //     })
+    //         .then(res=>res.json())
+    //         .then(data=>this.setState({
+    //             players:[...this.state.players, {data}]
+    //         }))
+    //   }
 
     infoClick=(player)=>{
         // console.log(player)
         this.setState({
            playerView:{
-            id:player.id,
+            id:player._id,
             name:player.name,
             nationality:player.nationality,
             age:player.age,
@@ -49,11 +114,12 @@ class Team extends Component {
 
 
     render() {
+        console.log('render')
         // console.log(this.state.status)
-        const players= this.props.players.map(player=>{
+        const players= this.state.players.map(player=>{
             return <Player 
                         player={player}    
-                        key={player.id} 
+                        key={player._id} 
                         onClick={this.infoClick}
                         onPlayerRemove={this.props.onPlayerRemove}  
                         onPlayerSale={this.props.onPlayerSale}  
@@ -64,6 +130,7 @@ class Team extends Component {
         return (
             <div className='con_div'>
                 <div className='text-center'>
+                    <h4>{this.state.user.name} </h4>
                     <h3>Arsenal Football Club</h3>
                 </div>
                 <div>

@@ -14,7 +14,8 @@ const PlayerInfo = ({player}) => {
             </div>
             <div>
                <table className='table info_table'>
-                    <tr>
+                   <tbody>
+                   <tr>
                         <td>Name</td>
                         <td>{player.name} </td>
                     </tr>
@@ -46,6 +47,7 @@ const PlayerInfo = ({player}) => {
                         <td>strong foot</td>
                         <td>{player.strong_foot} </td>
                     </tr>
+                   </tbody>
                </table>
             </div>
         </div>

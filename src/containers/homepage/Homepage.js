@@ -16,23 +16,18 @@ class Homepage extends Component {
         players:[],
         loading: true,
         forSale:true,
-        searchTerm:''
+        searchTerm:'',
+        // data:[]
     }
 
     componentDidMount(){
         // console.log(this.state.players)
-        fetch('http://localhost:5000/players/')
-        // ,{
-        //     method:'POST',
-        //     headers:{'Content-Type':'application/json'},
-        //     body: JSON.stringify(this.state)
-        // })
+        fetch('http://localhost:2000/players/')
             .then(res=>res.json())
             .then(data=>this.setState({
                 players:data,
                 loading:false
             }))
-            console.log('component has mounted')
     }
 
     onPlayerRemove=(id)=>{
@@ -72,14 +67,24 @@ class Homepage extends Component {
         // })
       }
 
-    addPlayer=(player)=>{
+      addPlayer=(player)=>{
         // console.log(player)
-         fetch('http://localhost:5000/players/addPlayer', {
-            method: 'POST',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(player)
+        //  fetch('http://localhost:5000/players/addPlayer', {
+        //     method: 'POST',
+        //     headers:{'Content-Type':'application/json'},
+        //     body: JSON.stringify(player)
+        // })
+        //     .then(res=>res.json())
+        //     .then(data=>{
+        //         if(data){
+        //             this.setState({data})
+        //             console.log('player added')
+        //         }
+        //     })
+        console.log('added player in homepage', player)
+        this.setState({
+            players:[...this.state.players, player]
         })
-            .then(res=>res.json())
       }
 
       onSearch=(searchTerm)=>{
@@ -89,9 +94,9 @@ class Homepage extends Component {
     render() {
         // console.log(this.state.players)
         const {players,searchTerm}= this.state;
-        const filteredPlayers=players.filter(player=>{
-            return player.name.toLowerCase().includes(searchTerm.toLowerCase()) || player.club.toLowerCase().includes(searchTerm.toLowerCase())
-        })
+        // const filteredPlayers=players.filter(player=>{
+        //     return player.name.toLowerCase().includes(searchTerm.toLowerCase()) || player.club.toLowerCase().includes(searchTerm.toLowerCase())
+        // })
         return (
             <div>
                 <Header/>
@@ -102,7 +107,7 @@ class Homepage extends Component {
                             <div className='spin'></div>
                             <div>LOADING</div>
                         </div> :
-                        <MarketPlace players={filteredPlayers} onSearch={this.onSearch} />  }  
+                        <MarketPlace players={players} onSearch={this.onSearch} />  }  
                     </Route> 
                     <Route path='/home/addPlayer'>
                         <AddPlayer addPlayer={this.addPlayer} />
@@ -110,6 +115,7 @@ class Homepage extends Component {
                     <Route path='/home/team'>
                         <Team 
                             players={this.state.players}
+                            // data={this.state.data}
                             onPlayerRemove={this.onPlayerRemove}  
                             onPlayerSale={this.onPlayerSale}  
                             user={this.props.user}
