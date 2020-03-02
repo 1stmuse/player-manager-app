@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../../components/aux'
+import Aux from '../../components/hoc'
 import Team from '../Team/Team'
 import AddPlayer from '../../containers/addPlayer/AddPlayer'
 import MarketPlace from '../../containers/marketPlace/MarketPlace'
