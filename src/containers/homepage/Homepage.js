@@ -22,23 +22,20 @@ class Homepage extends Component {
 
     componentDidMount(){
         // console.log(this.state.players)
-        fetch('http://localhost:2000/players/')
-            .then(res=>res.json())
-            .then(data=>this.setState({
-                players:data,
+        // fetch('http://localhost:2000/players/')
+        //     .then(res=>res.json())
+        //     .then(data=>this.setState({
+        //         players:data,
+        //         loading:false
+        //     }))
+        fetch('http://localhost:2000/players/forSales')
+        .then(res=> res.json)
+        .then(players=>{
+            this.setState({
+                players,
                 loading:false
-            }))
-    }
-
-    onPlayerRemove=(id)=>{
-        console.log(id)
-        this.setState(prevState=>{
-            const removePlayer= prevState.players.filter(player=>player._id !== id)
-            return {
-                players:removePlayer
-            }
-        }) 
-            console.log(this.state.players)
+            })
+        })
     }
 
     onPlayerSale=(id)=>{
@@ -52,39 +49,6 @@ class Homepage extends Component {
             .then(data=> this.setState({
                 players:[...this.state.players,{data}]
             }))
-
-
-        // this.setState(prevState=>{
-        //   let tod =prevState.players.map(player=>{
-        //     if(player.id===id){
-        //       player.forSale=!player.forSale
-        //       console.log(player)
-        //     }
-        //   })
-        //   return{
-        //     prevState:tod
-        //   }
-        // })
-      }
-
-      addPlayer=(player)=>{
-        // console.log(player)
-        //  fetch('http://localhost:5000/players/addPlayer', {
-        //     method: 'POST',
-        //     headers:{'Content-Type':'application/json'},
-        //     body: JSON.stringify(player)
-        // })
-        //     .then(res=>res.json())
-        //     .then(data=>{
-        //         if(data){
-        //             this.setState({data})
-        //             console.log('player added')
-        //         }
-        //     })
-        console.log('added player in homepage', player)
-        this.setState({
-            players:[...this.state.players, player]
-        })
       }
 
       onSearch=(searchTerm)=>{
@@ -109,12 +73,11 @@ class Homepage extends Component {
                         </div> :
                         <MarketPlace players={players} onSearch={this.onSearch} />  }  
                     </Route> 
-                    <Route path='/home/addPlayer'>
+                    <Route path='/home/faddPlayer'>
                         <AddPlayer addPlayer={this.addPlayer} />
                     </Route>
                     <Route path='/home/team'>
                         <Team 
-                            players={this.state.players}
                             // data={this.state.data}
                             onPlayerRemove={this.onPlayerRemove}  
                             onPlayerSale={this.onPlayerSale}  

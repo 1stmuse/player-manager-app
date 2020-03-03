@@ -1,11 +1,12 @@
 const router= require('express').Router();
-const Schema=require('mongoose').Schema
+// const Schema=require('mongoose').Schema;
+const Types=require('mongoose').Types
 
 let Player = require('../models/player.model');
 
 
-router.route('/').get((req, res)=>{
-    Player.find()
+router.route('/:id').get((req, res)=>{
+    Player.find(req.params.id)
         .then(users=> res.json(users))
         .catch(err=> res.status(404).json('error' + err))
 })
@@ -20,8 +21,8 @@ router.route('/addPlayer').post((req, res)=>{
         position: req.body.position,
         value: req.body.value,
         strong_foot:req.body.strong_foot,
-        club: req.body.club
-        // managerId:Schema.Types.ObjectId(req.body.managerId)
+        club: req.body.club,
+        managerId:Types.ObjectId(req.body.managerId)
     }
 
     const newPlayer = new Player(playerInfo)
@@ -30,16 +31,15 @@ router.route('/addPlayer').post((req, res)=>{
      .catch(err=> res.status(404).json('error' + err) )
 })
 
-router.route('/:id').delete((req, res)=>{
+router.route('/delete/:id').delete((req, res)=>{
     Player.findByIdAndDelete(req.params.id)
         .then(()=>res.json('player deleted'))
         .catch(err=> res.status(404).json('error' + err))
 })
 
 
-router.route('/playersForSale').post((req,res)=>{
-    const managerId= Schema.ObjectId(req.body.managerId)
-    Player.find({managerId:managerId})
+router.route('/forSales').get((req,res)=>{
+    Player.find({forSale:true})
         .then(players=>res.json(players))
         .catch(err=> res.status(404).json('error ' + err))
 })

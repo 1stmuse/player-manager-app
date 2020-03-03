@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter} from 'react-router-dom'
 import './Login.css'
 
 
@@ -21,7 +22,7 @@ class Login extends React.Component{
 
 
    onSubmit=()=>{
-       fetch('http://localhost:5000/managers/login',{
+       fetch('http://localhost:22000/managers/login',{
            method:'POST',
            headers:{'Content-Type':'application/json'},
            body:JSON.stringify(this.state)
@@ -30,6 +31,7 @@ class Login extends React.Component{
        .then(data=>{
            if(data){
                this.props.loadUser(data)
+               this.props.history.push('/home/team')
            }
        })
    }
@@ -54,4 +56,4 @@ class Login extends React.Component{
     }
 };
 
-export default Login;
+export default withRouter(Login);

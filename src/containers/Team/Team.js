@@ -22,75 +22,70 @@ class Team extends Component {
         },
         user:{
             name:'',
-            password:'',
-            email:''
-        },
-        balance:'$4,500,000'
+            id:'',
+            account:''
+        }
     }
 
-
-    componentDidMount(){
-        // console.log(this.state.players)
-        // fetch('http://localhost:2000/players/') 
-        //     .then(res=>res.json())
-        //     .then(data=>{
-        //         const {_id,name,nationality,age,strength,position,status,value,strong_foot}=data[0];
-        //         this.setState({
-        //             players:data,
-        //             playerView:{
-        //                 id:_id,name,nationality,age,strength,position,status,value,strong_foot
-        //             }
-        //         })
-        //     })
-        //     console.log('component has mounted')
-
-        // const {_id,name,nationality,age,strength,position,status,value,strong_foot}=this.props.players[0]
-        // console.log(this.state.players)
-        console.log('component did mount')
-            this.setState({
-                players:this.props.players,
-            })
-    }
-
-    componentWillMount() {
-        console.log('component will mount')
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        // localStorage.setItem('players', JSON.stringify(nextState.players))
-        console.log('component will update')
-    }
-    
-
-
-    addPlayer=(data)=>{
-        this.setState({
-            players:[...this.state.players, {data}]
+    componentWillMount(){
+        const {id, name, account}=this.props.user
+        this.setState(()=>{
+            return{
+                user:{
+                    name, id, account
+                }
+            }
         })
     }
 
-    // onPlayerRemove=(id)=>{
-    //     console.log(id)
-    //     this.setState(prevState=>{
-    //         const removePlayer= prevState.players.filter(player=>player._id !== id)
-    //         return {
-    //             players:removePlayer
-    //         }
-    //     }) 
-    //         console.log(this.state.players)
-    // }
+    componentDidMount(){
+        console.log(this.state.players)
+        fetch(`http://localhost:2000/players/${this.state.user.id}`) 
+            .then(res=>res.json())
+            .then(data=>{
+                const {_id,name,nationality,age,strength,position,status,value,strong_foot}=data[0];
+                this.setState({
+                    players:data,
+                    playerView:{
+                        id:_id,name,nationality,age,strength,position,status,value,strong_foot
+                    }
+                })
+            })
+            console.log('component has mounted')
 
-    // addPlayer=(player)=>{
-    //      fetch('http://localhost:5000/players/addPlayer', {
-    //         method: 'POST',
-    //         headers:{'Content-Type':'application/json'},
-    //         body: JSON.stringify(player)
-    //     })
-    //         .then(res=>res.json())
-    //         .then(data=>this.setState({
-    //             players:[...this.state.players, {data}]
-    //         }))
-    //   }
+        // const {id, name, account}=this.props.user
+        // this.setState({
+        //     user:{
+        //         id,name,account
+        //     }
+        // })
+        // console.log(this.state.players)
+
+    }
+
+    
+
+
+    addPlayer=(player)=>{
+        fetch('http://localhost:2000/players/addPlayer', {
+        method: 'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(player)
+    })
+        .then(res=>res.json())
+        .then(data=>this.setState({
+            players:[{data}, ...this.state.players]
+        }))
+    }
+    
+
+    onPlayerRemove=(id)=>{
+        fetch(`http://localhost:2000/players/delete${id}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify()
+        })
+    }
 
     infoClick=(player)=>{
         // console.log(player)
@@ -121,7 +116,7 @@ class Team extends Component {
                         player={player}    
                         key={player._id} 
                         onClick={this.infoClick}
-                        onPlayerRemove={this.props.onPlayerRemove}  
+                        onPlayerRemove={this.onPlayerRemove}  
                         onPlayerSale={this.props.onPlayerSale}  
                     />
         })
@@ -135,7 +130,7 @@ class Team extends Component {
                 </div>
                 <div>
                     <div>{this.state.user.name} </div>
-                    <TeamAccount balance={this.state.balance} />
+                    <TeamAccount balance={this.state.account} />
                 </div>
                 <div className='contain_div'>
                     <div>

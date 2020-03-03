@@ -7,7 +7,7 @@ const managerSchema= new Schema({
     email: {type:String , required:true},
     password: {type:String, required:true},
     club: {type:String, required:true},
-    account:{type:Number, default:20000}
+    account:{type:Number, default:4500000}
 }, {
     timestamps: true
 });

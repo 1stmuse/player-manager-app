@@ -7,17 +7,15 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 function App() {
   const [user, setUser]= useState({
     name:'',
-    password:'',
-    email:'',
-    id:''
+    id:'',
+    account: ''
   })
 
   const LoadUser=(user)=>{
     setUser({
       name:user.name,
-      password:user.password,
-      email:user.email,
-      id:user._id
+      id:user._id,
+      account: user.account
     })
   }
 
