@@ -21,11 +21,11 @@ router.route('/register').post((req,res)=>{
 
 router.route('/login').post((req,res)=>{
     const loginInfo={
-        email:req.body.email,
+        // email:req.body.email,
         password: req.body.password,
         username: req.body.username
     }
-    Manager.find(({email:loginInfo.email} || {username:loginInfo.username}) &&{password:loginInfo.password})
+    Manager.find({password:loginInfo.password, username:loginInfo.username})
         .then(manager=> res.json('loged in'))
         .catch(err=> res.status(404).json('error'+ err))
 })
