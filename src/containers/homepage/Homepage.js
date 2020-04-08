@@ -21,13 +21,6 @@ class Homepage extends Component {
     }
 
     componentDidMount(){
-        // console.log(this.state.players)
-        // fetch('http://localhost:2000/players/')
-        //     .then(res=>res.json())
-        //     .then(data=>this.setState({
-        //         players:data,
-        //         loading:false
-        //     }))
         fetch('http://localhost:2000/players/forSales')
         .then(res=> res.json)
         .then(players=>{

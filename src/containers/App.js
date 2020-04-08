@@ -11,11 +11,11 @@ function App() {
     account: ''
   })
 
-  const LoadUser=(user)=>{
+  const LoadUser=(users)=>{
     setUser({
-      name:user.name,
-      id:user._id,
-      account: user.account
+      name:users.name,
+      id:users._id,
+      account: users.account
     })
   }
 
@@ -23,7 +23,7 @@ function App() {
     <Router>
       <div className="App">
         <Route path='/'  exact >
-          <GetStarted loadUser={LoadUser} />
+          <GetStarted loadUser={(e)=>LoadUser(e)} />
         </Route>
         <Route path='/home' >
           <Homepage user={user} />

@@ -1,12 +1,11 @@
 const router= require('express').Router();
-// const Schema=require('mongoose').Schema;
-const Types=require('mongoose').Types
+const Schema=require('mongoose').Schema;
 
 let Player = require('../models/player.model');
 
 
 router.route('/:id').get((req, res)=>{
-    Player.find(req.params.id)
+    Player.findById(req.params.id)
         .then(users=> res.json(users))
         .catch(err=> res.status(404).json('error' + err))
 })
@@ -22,7 +21,7 @@ router.route('/addPlayer').post((req, res)=>{
         value: req.body.value,
         strong_foot:req.body.strong_foot,
         club: req.body.club,
-        managerId:Types.ObjectId(req.body.managerId)
+        managerId:Schema.Types.ObjectId(req.body.managerId)
     }
 
     const newPlayer = new Player(playerInfo)

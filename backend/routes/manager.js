@@ -14,9 +14,16 @@ router.route('/register').post((req,res)=>{
     }
 
     const newManager= new Manager(ManagerInfo)
-    newManager.save()
-        .then(()=> res.json(newManager))
-        .catch(err=> res.status(404).json('error' + err))
+
+    Manager.find({email:ManagerInfo.email})
+        .then(date=>{
+            if(date.length<1){
+                newManager.save()
+                .then(()=> res.json(newManager))
+            }else{
+                res.json('user exist')
+            }
+        })
 })
 
 router.route('/login').post((req,res)=>{
@@ -26,14 +33,20 @@ router.route('/login').post((req,res)=>{
         username: req.body.username
     }
     Manager.find({password:loginInfo.password, username:loginInfo.username})
-        .then(manager=> res.json('loged in'))
-        .catch(err=> res.status(404).json('error'+ err))
+        .then(manager=> {
+            if(manager.length > 0){
+                res.status(200).json(manager)
+            }else{
+                res.json('invalid credentials')
+            }
+        })
+        .catch(err=> res.status(404).json('error from back' + err))
 })
 
-router.route('/').get((req, res)=>{
-    Manager.find()
-        .then(manager=> res.json(manager))
-})
+// router.route('/').get((req, res)=>{
+//     Manager.find()
+//         .then(manager=> res.json(manager))
+// })
 
 
 module.exports= router;

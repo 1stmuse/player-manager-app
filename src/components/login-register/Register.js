@@ -51,29 +51,29 @@ class Register extends React.Component {
 
     render(){
      return (
-          <div className='signup card'>
-             <form className="form mb-3 text-primary">
-             <div className='form-group'>
-                      <p className='text-center'>Name</p>
-                      <input type='text' className='form-control' onChange={this.handleChange} name='name' />
+          <div className=''>
+             <form className="">
+             <div className='fm-group'>
+                      <p className=''>Name</p>
+                      <input type='text' className='' onChange={this.handleChange} name='name' />
                  </div>
-                 <div className='form-group'>
+                 <div className='fm-group'>
                       <p>Email</p>
-                      <input type='email' className='form-control' onChange={this.handleChange} name='email' />
+                      <input type='' className='' onChange={this.handleChange} name='email' />
                  </div>
-                 <div className='form-group'>
-                      <p>Username</p>
-                      <input type='text' className='form-control' onChange={this.handleChange} name='username' />
+                 <div className='fm-group'>
+                      <p className='ml-3'>Username</p>
+                      <input type='text' className='' onChange={this.handleChange} name='username' />
                  </div>
-                 <div className='form-group'>
+                 <div className='fm-group'>
                       <p>Club</p>
-                      <input type='text' className='form-control' onChange={this.handleChange} name='club' />
+                      <input type='text' className='' onChange={this.handleChange} name='club' />
                  </div>
-                 <div className='form-group'>
-                      <p>Password</p>
-                      <input type='password' className='form-control' onChange={this.handleChange} name='password'/>
+                 <div className='fm-group'>
+                      <p className='ml-3'>Password</p>
+                      <input type='password' className='' onChange={this.handleChange} name='password'/>
                  </div>
-                 <input type='submit' className='btn btn-primary pl-5 pr-5' value='Sign up' onClick={this.handleSubmit} />
+                 <input type='submit' className='' value='Sign up' onClick={this.handleSubmit} />
               </form>
           </div>
       );

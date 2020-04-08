@@ -13,7 +13,7 @@ const playerSchema= new Schema({
     strong_foot: {type:String , required:true},
     club: {type:String , required:true},
     forSale:{type:Boolean, required:true, default:false},
-    // managerId: {type: ObjectId}
+    managerId: {type: ObjectId}
 
 }, {
     timestamps: true

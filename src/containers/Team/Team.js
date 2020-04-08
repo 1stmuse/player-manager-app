@@ -29,6 +29,7 @@ class Team extends Component {
 
     componentWillMount(){
         const {id, name, account}=this.props.user
+        console.log(this.props.user)
         this.setState(()=>{
             return{
                 user:{
@@ -43,6 +44,7 @@ class Team extends Component {
         fetch(`http://localhost:2000/players/${this.state.user.id}`) 
             .then(res=>res.json())
             .then(data=>{
+                console.log(data)
                 const {_id,name,nationality,age,strength,position,status,value,strong_foot}=data[0];
                 this.setState({
                     players:data,
@@ -52,14 +54,6 @@ class Team extends Component {
                 })
             })
             console.log('component has mounted')
-
-        // const {id, name, account}=this.props.user
-        // this.setState({
-        //     user:{
-        //         id,name,account
-        //     }
-        // })
-        // console.log(this.state.players)
 
     }
 
