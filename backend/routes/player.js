@@ -3,9 +3,13 @@ const Schema=require('mongoose').Schema;
 
 let Player = require('../models/player.model');
 
+router.route('/').get((req, res)=>{
+    Player.find()
+    .then(playres=> res.json(playres))
+})
 
-router.route('/:id').get((req, res)=>{
-    Player.findById(req.params.id)
+router.route('/own/:id').get((req, res)=>{
+    Player.find({managerId:req.params.id})
         .then(users=> res.json(users))
         .catch(err=> res.status(404).json('error' + err))
 })
@@ -21,7 +25,7 @@ router.route('/addPlayer').post((req, res)=>{
         value: req.body.value,
         strong_foot:req.body.strong_foot,
         club: req.body.club,
-        managerId:Schema.Types.ObjectId(req.body.managerId)
+        managerId:req.body.managerId
     }
 
     const newPlayer = new Player(playerInfo)
@@ -37,8 +41,8 @@ router.route('/delete/:id').delete((req, res)=>{
 })
 
 
-router.route('/forSales').get((req,res)=>{
-    Player.find({forSale:true})
+router.route('/forSale').get((req,res)=>{
+    Player.find({forSale: true})
         .then(players=>res.json(players))
         .catch(err=> res.status(404).json('error ' + err))
 })

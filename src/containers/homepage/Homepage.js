@@ -15,17 +15,17 @@ class Homepage extends Component {
     state={
         players:[],
         loading: true,
-        forSale:true,
-        searchTerm:'',
+        searchTerm:''
         // data:[]
     }
 
     componentDidMount(){
-        fetch('http://localhost:2000/players/forSales')
-        .then(res=> res.json)
+        fetch('http://localhost:2000/players/forSale')
+        .then(res=> res.json())
         .then(players=>{
+            console.log('from response', players)
             this.setState({
-                players,
+                players:players,
                 loading:false
             })
         })
@@ -49,11 +49,8 @@ class Homepage extends Component {
       }
 
     render() {
-        // console.log(this.state.players)
+        console.log(' from homepage',this.state.players)
         const {players,searchTerm}= this.state;
-        // const filteredPlayers=players.filter(player=>{
-        //     return player.name.toLowerCase().includes(searchTerm.toLowerCase()) || player.club.toLowerCase().includes(searchTerm.toLowerCase())
-        // })
         return (
             <div>
                 <Header/>
