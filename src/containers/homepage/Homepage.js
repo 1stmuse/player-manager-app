@@ -3,7 +3,6 @@ import Aux from '../../components/hoc'
 import MarketPlace from '../../containers/marketPlace/MarketPlace'
 import Header from '../../components/header_footer/Header'
 import Footer from '../../components/header_footer/Footer'
-import {Route} from 'react-router-dom'
 
 import './HomePage.css'
 
@@ -46,7 +45,6 @@ class Homepage extends Component {
       }
 
     render() {
-        console.log(' from homepage',this.state.players)
         const {players,searchTerm}= this.state;
         return (
             <div className='home-container'>
