@@ -31,8 +31,8 @@ class Login extends React.Component{
        .then(res=>res.json())
        .then(data=>{
            if(data){
-               console.log(' from login click',data[0])
-               this.props.loadUser(data[0])
+               console.log(' from login click',data)
+               this.props.loadUser(data)
                this.props.history.push('/home/team')
            }else{
                console.log('no response')

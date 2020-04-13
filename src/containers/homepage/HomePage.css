@@ -25,5 +25,10 @@
   }
   
   .spinner{
-    margin: 90px 50%;
+    margin: auto auto;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }

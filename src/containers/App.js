@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GetStarted from './getstarted/GetStarted'
 import Homepage from './homepage/Homepage'
+import Team from './Team/Team'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 function App() {
@@ -27,6 +28,14 @@ function App() {
         </Route>
         <Route path='/home' >
           <Homepage user={user} />
+        </Route>
+        <Route path='/team'>
+          <Team 
+                // data={this.state.data}
+                // onPlayerRemove={this.onPlayerRemove}  
+                // onPlayerSale={this.onPlayerSale}  
+                user={user}
+            />
         </Route>
       </div>
     </Router>

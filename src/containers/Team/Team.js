@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import PlayerInfo from '../../components/playerInfo/PlayerInfo'
 import TeamAccount from '../../components/team_account/TeamAccount'
 import Player from '.././../components/players/Player'
+import {Route} from 'react-router-dom'
+import AddPlayer from '../addPlayer/AddPlayer'
+import Header from '../../components/header_footer/Header'
+import Footer from '../../components/header_footer/Footer'
+import Aux from '../../components/hoc'
 import './Team.css'
 
 
@@ -61,15 +66,9 @@ class Team extends Component {
 
 
     addPlayer=(player)=>{
-        fetch('http://localhost:2000/players/addPlayer', {
-        method: 'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify(player)
-    })
-        .then(res=>res.json())
-        .then(data=>this.setState({
-            players:[{data}, ...this.state.players]
-        }))
+       this.setState({
+            players:[{player}, ...this.state.players]
+        })
     }
     
 
@@ -118,22 +117,31 @@ class Team extends Component {
 
         return (
             <div className='con_div'>
-                <div className='text-center'>
-                    <h4>{this.state.user.name} </h4>
-                    <h3>Arsenal Football Club</h3>
-                </div>
-                <div>
-                    <div>{this.state.user.name} </div>
-                    <TeamAccount balance={this.state.account} />
-                </div>
-                <div className='contain_div'>
-                    <div>
-                        {players}
-                    </div>
-                    <div>
-                        <PlayerInfo player={this.state.playerView} />
-                    </div>
-                </div>
+                <Header/>
+                <Aux>
+                    <Route path='/team' exact>
+                        <div className='text-center'>
+                            <h4>{this.state.user.name} </h4>
+                            <h3>Arsenal Football Club</h3>
+                        </div>
+                        <div>
+                            <div>{this.state.user.name} </div>
+                            <TeamAccount balance={this.state.account} />
+                        </div>
+                        <div className='contain_div'>
+                            <div>
+                                {players}
+                            </div>
+                            <div>
+                                <PlayerInfo player={this.state.playerView} />
+                            </div>
+                        </div>
+                    </Route>
+                    <Route path='/team/addPlayer'>
+                        <AddPlayer addPlayer={this.addPlayer} />
+                    </Route>
+                </Aux>
+                <Footer/>
             </div>
             
         );

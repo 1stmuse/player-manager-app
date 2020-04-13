@@ -52,31 +52,18 @@ class Homepage extends Component {
         console.log(' from homepage',this.state.players)
         const {players,searchTerm}= this.state;
         return (
-            <div>
+            <div className='home-container'>
                 <Header/>
                 <div className='home_page'>
-                     <Aux >
-                    <Route path='/home' exact >
-                        {this.state.loading? <div className='spinner'>
-                            <div className='spin'></div>
-                            <div>LOADING</div>
-                        </div> :
-                        <MarketPlace players={players} onSearch={this.onSearch} />  }  
-                    </Route> 
-                    <Route path='/home/faddPlayer'>
-                        <AddPlayer addPlayer={this.addPlayer} />
-                    </Route>
-                    <Route path='/home/team'>
-                        <Team 
-                            // data={this.state.data}
-                            onPlayerRemove={this.onPlayerRemove}  
-                            onPlayerSale={this.onPlayerSale}  
-                            user={this.props.user}
-                        />
-                    </Route>
-                </Aux>
-                    
-                   
+                    <Aux >
+                        {/* <Route path='/home' exact > */}
+                            {this.state.loading? <div className='spinner'>
+                                <div className='spin'></div>
+                                <div>LOADING</div>
+                            </div> :
+                            <MarketPlace players={players} onSearch={this.onSearch} />  }  
+                        {/* </Route>  */}
+                    </Aux>
                 </div>
                 <Footer/>
             </div>
