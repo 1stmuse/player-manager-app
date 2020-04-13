@@ -2,10 +2,6 @@ const router= require('express').Router();
 
 let Player = require('../models/player.model');
 
-router.route('/').get((req, res)=>{
-    Player.find()
-    .then(playres=> res.json(playres))
-})
 
 router.route('/own/:id').get((req, res)=>{
     Player.find({managerId:req.params.id})

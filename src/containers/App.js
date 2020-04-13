@@ -15,7 +15,7 @@ function App() {
   const LoadUser=(users)=>{
     setUser({
       name:users.name,
-      id:users._id,
+      id:users.id,
       account: users.account
     })
   }
@@ -30,12 +30,7 @@ function App() {
           <Homepage user={user} />
         </Route>
         <Route path='/team'>
-          <Team 
-                // data={this.state.data}
-                // onPlayerRemove={this.onPlayerRemove}  
-                // onPlayerSale={this.onPlayerSale}  
-                user={user}
-            />
+          <Team user={user}/>
         </Route>
       </div>
     </Router>

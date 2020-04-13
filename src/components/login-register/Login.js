@@ -33,7 +33,7 @@ class Login extends React.Component{
            if(data){
                console.log(' from login click',data)
                this.props.loadUser(data)
-               this.props.history.push('/home/team')
+               this.props.history.push('/team')
            }else{
                console.log('no response')
            }

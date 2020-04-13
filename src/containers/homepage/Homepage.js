@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Aux from '../../components/hoc'
-import Team from '../Team/Team'
-import AddPlayer from '../../containers/addPlayer/AddPlayer'
 import MarketPlace from '../../containers/marketPlace/MarketPlace'
 import Header from '../../components/header_footer/Header'
 import Footer from '../../components/header_footer/Footer'
@@ -16,7 +14,6 @@ class Homepage extends Component {
         players:[],
         loading: true,
         searchTerm:''
-        // data:[]
     }
 
     componentDidMount(){
@@ -56,13 +53,12 @@ class Homepage extends Component {
                 <Header/>
                 <div className='home_page'>
                     <Aux >
-                        {/* <Route path='/home' exact > */}
-                            {this.state.loading? <div className='spinner'>
-                                <div className='spin'></div>
-                                <div>LOADING</div>
+                        {   this.state.loading? <div className='spinner'>
+                            <div className='spin'></div>
+                            <div>LOADING</div>
                             </div> :
-                            <MarketPlace players={players} onSearch={this.onSearch} />  }  
-                        {/* </Route>  */}
+                            <MarketPlace players={players} onSearch={this.onSearch} />
+                        } 
                     </Aux>
                 </div>
                 <Footer/>

@@ -45,6 +45,16 @@ class Team extends Component {
     }
 
     componentDidMount(){
+        const {id, name, account}=this.props.user
+        console.log(this.props.user)
+        this.setState(()=>{
+            return{
+                user:{
+                    name, id, account
+                }
+            }
+        })
+        console.log('persisted user', this.state.user)
         console.log(this.state.players)
         fetch(`http://localhost:2000/players/${this.state.user.id}`) 
             .then(res=>res.json())
@@ -58,7 +68,7 @@ class Team extends Component {
                     }
                 })
             })
-            console.log('component has mounted')
+            console.log('component has mounted wioth the id', this.state.user.id)
 
     }
 
