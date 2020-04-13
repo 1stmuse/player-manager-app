@@ -13,6 +13,7 @@ function App() {
   })
 
   const LoadUser=(users)=>{
+    localStorage.setItem('users', JSON.stringify(users))
     setUser({
       name:users.name,
       id:users.id,
@@ -20,6 +21,7 @@ function App() {
     })
   }
 
+const storeduser =JSON.parse(localStorage.getItem('users'))
   return (
     <Router>
       <div className="App">
@@ -27,10 +29,10 @@ function App() {
           <GetStarted loadUser={(e)=>LoadUser(e)} />
         </Route>
         <Route path='/home' >
-          <Homepage user={user} />
+          <Homepage user={storeduser} />
         </Route>
         <Route path='/team'>
-          <Team user={user}/>
+          <Team user={storeduser}/>
         </Route>
       </div>
     </Router>

@@ -45,7 +45,8 @@ class Team extends Component {
     }
 
     componentDidMount(){
-        const {id, name, account}=this.props.user
+        console.log(localStorage.getItem('users'))
+        const {id, name, account}= this.state.user
         console.log(this.props.user)
         this.setState(()=>{
             return{
