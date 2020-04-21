@@ -45,18 +45,6 @@ class Team extends Component {
     }
 
     componentDidMount(){
-        console.log(localStorage.getItem('users'))
-        const {id, name, account}= this.state.user
-        console.log(this.props.user)
-        this.setState(()=>{
-            return{
-                user:{
-                    name, id, account
-                }
-            }
-        })
-        console.log('persisted user', this.state.user)
-        console.log(this.state.players)
         fetch(`http://localhost:2000/players/${this.state.user.id}`) 
             .then(res=>res.json())
             .then(data=>{
@@ -89,10 +77,22 @@ class Team extends Component {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify()
         })
+        .then(response=>{
+            if(response.ok){
+                this.setState(prevState=>{
+                    const newState =prevState.players.filter(player=>{
+                        return player.id !== id
+                    })
+                    return{
+                        players: newState
+                    }
+                })
+            }else(alert('player cannot be deleted'))
+        })
+        .catch(err=> alert('bad request' + err.message))
     }
 
     infoClick=(player)=>{
-        // console.log(player)
         this.setState({
            playerView:{
             id:player._id,
@@ -113,8 +113,6 @@ class Team extends Component {
 
 
     render() {
-        console.log('render')
-        // console.log(this.state.status)
         const players= this.state.players.map(player=>{
             return <Player 
                         player={player}    
@@ -149,7 +147,7 @@ class Team extends Component {
                         </div>
                     </Route>
                     <Route path='/team/addPlayer'>
-                        <AddPlayer addPlayer={this.addPlayer} />
+                        <AddPlayer addPlayer={this.addPlayer}  managerId ={this.state.user.id} />
                     </Route>
                 </Aux>
                 <Footer/>

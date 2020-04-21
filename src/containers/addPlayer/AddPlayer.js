@@ -15,7 +15,7 @@ class AddPlayer extends Component {
             value:'',
             strong_foot:'',
             club:'',
-            // managerId:
+            managerId: this.props.managerId
     }
 
 
@@ -34,14 +34,20 @@ class AddPlayer extends Component {
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify(player)
         })
-            .then(res=>res.json())
-            .then(data=>{
-                if(data){
+        .then(response=>{
+            if(response.ok){
+                response.json()
+                .then(data=>{
                     alert('player added')
                     this.props.addPlayer(data)
-                    this.props.history.push('/home/team')
-                }
-            })
+                    this.props.history.push('/team')
+                })
+            }else{
+                response.json()
+                .then(err=> alert('could not add player' + err.message))
+            }
+        })
+        .catch(err=> alert('bad request' + err.message))
         this.setState({
             name:'',
             nationality:'',
