@@ -22,7 +22,6 @@ class Register extends React.Component {
          this.setState({
               [name]: event.target.value
          })
-         console.log(this.state.name)
     }
 
     handleSubmit=(event)=>{
@@ -36,7 +35,7 @@ class Register extends React.Component {
                . then(data=>{
                     if(data){
                          this.props.loadUser(data)
-                         this.props.history.push('/home/team')
+                         this.props.history.push('/team')
                     }
                } )
 

@@ -28,24 +28,25 @@ class Team extends Component {
         user:{
             name:'',
             id:'',
-            account:''
+            account:'',
+            club: ''
         }
     }
 
     componentWillMount(){
-        const {id, name, account}=this.props.user
-        console.log(this.props.user)
+        const {id, name, account, club}=this.props.user
         this.setState(()=>{
             return{
                 user:{
-                    name, id, account
+                    name, id, account, club
                 }
             }
         })
     }
 
     componentDidMount(){
-        fetch(`http://localhost:2000/players/${this.state.user.id}`) 
+        console.log(this.state.user)
+        fetch(`http://localhost:2000/players/own/${this.state.user.id}`) 
             .then(res=>res.json())
             .then(data=>{
                 console.log(data)
@@ -56,24 +57,23 @@ class Team extends Component {
                         id:_id,name,nationality,age,strength,position,status,value,strong_foot
                     }
                 })
-            })
+            }).catch(err=> console.log('error ' + err.message))
             console.log('component has mounted wioth the id', this.state.user.id)
 
     }
 
-    
-
 
     addPlayer=(player)=>{
        this.setState({
-            players:[{player}, ...this.state.players]
+            players:[...this.state.players, player]
         })
     }
     
 
     onPlayerRemove=(id)=>{
-        fetch(`http://localhost:2000/players/delete${id}`, {
-            method: 'POST',
+        console.log(id)
+        fetch(`http://localhost:2000/players/delete/${id}`, {
+            method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify()
         })
@@ -81,7 +81,7 @@ class Team extends Component {
             if(response.ok){
                 this.setState(prevState=>{
                     const newState =prevState.players.filter(player=>{
-                        return player.id !== id
+                        return player._id !== id
                     })
                     return{
                         players: newState
@@ -125,31 +125,32 @@ class Team extends Component {
         
 
         return (
-            <div className='con_div'>
+            <div className='main-team'>
                 <Header/>
-                <Aux>
-                    <Route path='/team' exact>
-                        <div className='text-center'>
-                            <h4>{this.state.user.name} </h4>
-                            <h3>Arsenal Football Club</h3>
-                        </div>
-                        <div>
-                            <div>{this.state.user.name} </div>
-                            <TeamAccount balance={this.state.account} />
-                        </div>
-                        <div className='contain_div'>
-                            <div>
-                                {players}
+                <div className='con_div'>
+                    <Aux>
+                        <Route path='/team' exact>
+                            <div className='text-center'>
+                                <h4>{this.state.user.name} </h4>
+                                <h3>{this.state.user.club} Football Club</h3>
                             </div>
                             <div>
-                                <PlayerInfo player={this.state.playerView} />
+                                <TeamAccount balance={this.state.user.account} />
                             </div>
-                        </div>
-                    </Route>
-                    <Route path='/team/addPlayer'>
-                        <AddPlayer addPlayer={this.addPlayer}  managerId ={this.state.user.id} />
-                    </Route>
-                </Aux>
+                            <div className='contain_div'>
+                                <div>
+                                    {players}
+                                </div>
+                                <div className='info-div'>
+                                    <PlayerInfo player={this.state.playerView} />
+                                </div>
+                            </div>
+                        </Route>
+                        <Route path='/team/addPlayer'>
+                            <AddPlayer addPlayer={this.addPlayer}  managerId ={this.state.user.id} />
+                        </Route>
+                    </Aux>
+                </div>
                 <Footer/>
             </div>
             

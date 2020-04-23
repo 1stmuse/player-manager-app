@@ -17,9 +17,7 @@ class Login extends React.Component{
         this.setState({
              [name]: event.target.value
         })
-        // console.log(this.state)
    }
-
 
    onSubmit=(event)=>{
        event.preventDefault();
@@ -31,7 +29,6 @@ class Login extends React.Component{
        .then(res=>res.json())
        .then(data=>{
            if(data){
-               console.log(' from login click',data)
                this.props.loadUser(data)
                this.props.history.push('/team')
            }else{
@@ -39,7 +36,6 @@ class Login extends React.Component{
            }
        }).catch(err=> alert(err))
    }
-
 
     render(){
         return (

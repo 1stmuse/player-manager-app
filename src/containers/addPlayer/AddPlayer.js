@@ -37,9 +37,9 @@ class AddPlayer extends Component {
         .then(response=>{
             if(response.ok){
                 response.json()
-                .then(data=>{
-                    alert('player added')
-                    this.props.addPlayer(data)
+                .then(response=>{
+                    alert(response)
+                    this.props.addPlayer(response)
                     this.props.history.push('/team')
                 })
             }else{

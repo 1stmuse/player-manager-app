@@ -6,7 +6,7 @@ let Player = require('../models/player.model');
 router.route('/own/:id').get((req, res)=>{
     Player.find({managerId:req.params.id})
         .then(users=> res.json(users))
-        .catch(err=> res.status(404).json('error' + err))
+        .catch(err=> res.status(404).json('error to get players' + err))
 })
 
 router.route('/addPlayer').post((req, res)=>{

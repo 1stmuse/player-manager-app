@@ -7,10 +7,10 @@ let Manager = require('../models/manager.model');
 
 router.route('/register').post(async(req,res)=>{
 
-    const chechEmail = await Manager.findOne({email: req.body.email})
-    if(chechEmail) return res.status(400).json('a user with that email already exist')
-    const checkUsername= await Manager.findOne({username: req.body.username})
-    if(checkUsername) return res.status(400).json('username already exist')
+    const emailExist = await Manager.findOne({email: req.body.email})
+    if(emailExist) return res.status(400).json('a user with that email already exist')
+    const usernameExist= await Manager.findOne({username: req.body.username})
+    if(usernameExist) return res.status(400).json('username already exist')
 
     const salt = await bcrypt.genSalt(10)
     const hashPass = await bcrypt.hash(String(req.body.password), salt)

@@ -17,7 +17,8 @@ function App() {
     setUser({
       name:users.name,
       id:users.id,
-      account: users.account
+      account: users.account,
+      club:users.club
     })
   }
 
