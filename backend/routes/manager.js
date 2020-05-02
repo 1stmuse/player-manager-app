@@ -68,10 +68,6 @@ router.route('/login').post( async(req,res)=>{
     }
 })
 
-// router.route('/').get((req, res)=>{
-//     Manager.find()
-//         .then(manager=> res.json(manager))
-// })
 
 
 module.exports= router;

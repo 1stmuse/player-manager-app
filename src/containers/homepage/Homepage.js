@@ -48,7 +48,7 @@ class Homepage extends Component {
         const {players,searchTerm}= this.state;
         return (
             <div className='home-container'>
-                <Header/>
+                {/* <Header/> */}
                 <div className='home_page'>
                     <Aux >
                         {   this.state.loading? <div className='spinner'>
@@ -59,7 +59,7 @@ class Homepage extends Component {
                         } 
                     </Aux>
                 </div>
-                <Footer/>
+                {/* <Footer/> */}
             </div>
           
         );

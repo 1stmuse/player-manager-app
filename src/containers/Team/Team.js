@@ -126,7 +126,7 @@ class Team extends Component {
 
         return (
             <div className='main-team'>
-                <Header/>
+                {/* <Header/> */}
                 <div className='con_div'>
                     <Aux>
                         <Route path='/team' exact>
@@ -151,7 +151,7 @@ class Team extends Component {
                         </Route>
                     </Aux>
                 </div>
-                <Footer/>
+                {/* <Footer/> */}
             </div>
             
         );
