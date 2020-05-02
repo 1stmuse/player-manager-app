@@ -27,20 +27,7 @@ class Homepage extends Component {
         })
     }
 
-    onPlayerSale=(id)=>{
-
-        fetch('http://localhost:5000/players/addPlayer', {
-            method: 'UPDATE',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(id)
-        })
-            .then(res=> res.json())
-            .then(data=> this.setState({
-                players:[...this.state.players,{data}]
-            }))
-      }
-
-      onSearch=(searchTerm)=>{
+    onSearch=(searchTerm)=>{
         this.setState({searchTerm})
       }
 

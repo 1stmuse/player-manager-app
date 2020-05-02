@@ -68,7 +68,19 @@ class Team extends Component {
             players:[...this.state.players, player]
         })
     }
-    
+
+    onPlayerSale=(id)=>{
+
+        fetch('http://localhost:2000/players/sale', {
+            method: 'UPDATE',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(id)
+        })
+            .then(res=> res.json())
+            .then(data=> this.setState({
+                players:[...this.state.players,{data}]
+            }))
+      }
 
     onPlayerRemove=(id)=>{
         console.log(id)
@@ -119,7 +131,7 @@ class Team extends Component {
                         key={player._id} 
                         onClick={this.infoClick}
                         onPlayerRemove={this.onPlayerRemove}  
-                        onPlayerSale={this.props.onPlayerSale}  
+                        onPlayerSale={this.onPlayerSale}  
                     />
         })
         
