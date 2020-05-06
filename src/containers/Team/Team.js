@@ -13,6 +13,7 @@ import './Team.css'
 class Team extends Component {
 
     state={
+        sold:false,
         players:[],
         playerView:{
             id:'',
@@ -57,7 +58,7 @@ class Team extends Component {
                         id:_id,name,nationality,age,strength,position,status,value,strong_foot
                     }
                 })
-            }).catch(err=> console.log('error ' + err.message))
+            }).catch(err=> console.log('error oo ' + err.message))
             console.log('component has mounted wioth the id', this.state.user.id)
 
     }
@@ -70,16 +71,24 @@ class Team extends Component {
     }
 
     onPlayerSale=(id)=>{
-
         fetch('http://localhost:2000/players/sale', {
-            method: 'UPDATE',
+            method: 'PUT',
             headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(id)
+            body: JSON.stringify({id})
         })
-            .then(res=> res.json())
-            .then(data=> this.setState({
-                players:[...this.state.players,{data}]
-            }))
+            .then(data=> {
+                if(data){
+                    this.setState(prevState=>{
+                        const newState =prevState.players.filter(player=>{
+                            return player._id !== id
+                        })
+                        return{
+                            players: newState
+                        }
+                    })
+                }
+            })
+            .catch(err=> console.log(err))
       }
 
     onPlayerRemove=(id)=>{
@@ -149,6 +158,8 @@ class Team extends Component {
                             <div>
                                 <TeamAccount balance={this.state.user.account} />
                             </div>
+                            {this.state.players.length <=0 ?
+                             <h1 style={{textAlign:'center', margin:'20px auto', width:'50%'}}>no players</h1> :
                             <div className='contain_div'>
                                 <div>
                                     {players}
@@ -156,7 +167,7 @@ class Team extends Component {
                                 <div className='info-div'>
                                     <PlayerInfo player={this.state.playerView} />
                                 </div>
-                            </div>
+                            </div>}
                         </Route>
                         <Route path='/team/addPlayer'>
                             <AddPlayer addPlayer={this.addPlayer}  managerId ={this.state.user.id} />

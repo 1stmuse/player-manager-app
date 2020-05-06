@@ -35,18 +35,18 @@ router.route('/delete/:id').delete((req, res)=>{
         .catch(err=> res.status(404).json('error' + err))
 })
 
-router.route('/sale').post(async(req,res)=>{
+router.route('/sale').put(async(req,res)=>{
 
     const checkPlayerExist = await Player.findOne({_id: req.body.id})
     if(!checkPlayerExist) return res.status(400).json('player does not exist')
 
     try {
-        Player.findByIdAndUpdate({_id: req.body.id}, {forSale: true}, {new:true})
+        Player.findByIdAndUpdate({_id: req.body.id}, {forSale: true}, {new: true, useFindAndModify: false})
         .then(data=>{
-            if(data) return res.status(200).json('player available in market place ')
+            if(data) return res.status(200).json(data)
         })
     } catch (error) {
-        res.status(404).json(error)
+        res.status(404).json(error, 'backend')
     }
 })
 

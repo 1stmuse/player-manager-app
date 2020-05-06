@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Aux from '../../components/hoc'
 import MarketPlace from '../../containers/marketPlace/MarketPlace'
-import Header from '../../components/header_footer/Header'
-import Footer from '../../components/header_footer/Footer'
+// import Header from '../../components/header_footer/Header'
+// import Footer from '../../components/header_footer/Footer'
 
 import './HomePage.css'
 
