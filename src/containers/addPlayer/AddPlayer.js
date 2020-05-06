@@ -14,7 +14,8 @@ class AddPlayer extends Component {
             position:'',
             value:'',
             strong_foot:'',
-            club:''
+            club:'',
+            managerId: this.props.managerId
     }
 
 
@@ -28,20 +29,25 @@ class AddPlayer extends Component {
     createPlayer=(event)=>{
         event.preventDefault();
         const player=this.state
-        // this.props.addPlayer(player)
         fetch('http://localhost:2000/players/addPlayer', {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(player)
         })
-            .then(res=>res.json())
-            .then(data=>{
-                if(data){
-                    alert('player added')
-                    this.props.addPlayer(data)
-                    this.props.history.push('/home/team')
-                }
-            })
+        .then(response=>{
+            if(response.ok){
+                response.json()
+                .then(response=>{
+                    alert(response)
+                    this.props.addPlayer(response)
+                    this.props.history.push('/team')
+                })
+            }else{
+                response.json()
+                .then(err=> alert('could not add player' + err.message))
+            }
+        })
+        .catch(err=> alert('bad request' + err.message))
         this.setState({
             name:'',
             nationality:'',

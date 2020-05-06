@@ -1,7 +1,7 @@
 const mongoose= require('mongoose');
 
 const Schema = mongoose.Schema;
-const ObjectId= mongoose.Types.ObjectId
+const ObjectId= Schema.Types.ObjectId
 
 const playerSchema= new Schema({
     name: {type:String , required:true},
@@ -13,7 +13,7 @@ const playerSchema= new Schema({
     strong_foot: {type:String , required:true},
     club: {type:String , required:true},
     forSale:{type:Boolean, required:true, default:false},
-    // managerId: {type: ObjectId}
+    managerId: {type: ObjectId}
 
 }, {
     timestamps: true

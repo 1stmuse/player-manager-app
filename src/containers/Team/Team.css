@@ -1,15 +1,21 @@
-
+.main-team{
+    /* height: 100%; */
+}
 .con_div{
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: 20px;
     margin-left: 20px;
+    margin-top: 80px;
+    height: 100vh;
+    /* border: 7px solid yellow; */
 }
-
-
 .contain_div{
     margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+.info-div{
+    height: 100vh;
 }

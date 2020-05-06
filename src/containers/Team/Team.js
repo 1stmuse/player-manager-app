@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import PlayerInfo from '../../components/playerInfo/PlayerInfo'
 import TeamAccount from '../../components/team_account/TeamAccount'
 import Player from '.././../components/players/Player'
+import {Route} from 'react-router-dom'
+import AddPlayer from '../addPlayer/AddPlayer'
+import Header from '../../components/header_footer/Header'
+import Footer from '../../components/header_footer/Footer'
+import Aux from '../../components/hoc'
 import './Team.css'
 
 
 class Team extends Component {
 
     state={
+        sold:false,
         players:[],
         playerView:{
             id:'',
@@ -22,78 +28,92 @@ class Team extends Component {
         },
         user:{
             name:'',
-            password:'',
-            email:''
-        },
-        balance:'$4,500,000'
+            id:'',
+            account:'',
+            club: ''
+        }
     }
 
-
-    componentDidMount(){
-        // console.log(this.state.players)
-        // fetch('http://localhost:2000/players/') 
-        //     .then(res=>res.json())
-        //     .then(data=>{
-        //         const {_id,name,nationality,age,strength,position,status,value,strong_foot}=data[0];
-        //         this.setState({
-        //             players:data,
-        //             playerView:{
-        //                 id:_id,name,nationality,age,strength,position,status,value,strong_foot
-        //             }
-        //         })
-        //     })
-        //     console.log('component has mounted')
-
-        // const {_id,name,nationality,age,strength,position,status,value,strong_foot}=this.props.players[0]
-        // console.log(this.state.players)
-        console.log('component did mount')
-            this.setState({
-                players:this.props.players,
-            })
-    }
-
-    componentWillMount() {
-        console.log('component will mount')
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        // localStorage.setItem('players', JSON.stringify(nextState.players))
-        console.log('component will update')
-    }
-    
-
-
-    addPlayer=(data)=>{
-        this.setState({
-            players:[...this.state.players, {data}]
+    componentWillMount(){
+        const {id, name, account, club}=this.props.user
+        this.setState(()=>{
+            return{
+                user:{
+                    name, id, account, club
+                }
+            }
         })
     }
 
-    // onPlayerRemove=(id)=>{
-    //     console.log(id)
-    //     this.setState(prevState=>{
-    //         const removePlayer= prevState.players.filter(player=>player._id !== id)
-    //         return {
-    //             players:removePlayer
-    //         }
-    //     }) 
-    //         console.log(this.state.players)
-    // }
+    componentDidMount(){
+        console.log(this.state.user)
+        fetch(`http://localhost:2000/players/own/${this.state.user.id}`) 
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data)
+                const {_id,name,nationality,age,strength,position,status,value,strong_foot}=data[0];
+                this.setState({
+                    players:data,
+                    playerView:{
+                        id:_id,name,nationality,age,strength,position,status,value,strong_foot
+                    }
+                })
+            }).catch(err=> console.log('error oo ' + err.message))
+            console.log('component has mounted wioth the id', this.state.user.id)
 
-    // addPlayer=(player)=>{
-    //      fetch('http://localhost:5000/players/addPlayer', {
-    //         method: 'POST',
-    //         headers:{'Content-Type':'application/json'},
-    //         body: JSON.stringify(player)
-    //     })
-    //         .then(res=>res.json())
-    //         .then(data=>this.setState({
-    //             players:[...this.state.players, {data}]
-    //         }))
-    //   }
+    }
+
+
+    addPlayer=(player)=>{
+       this.setState({
+            players:[...this.state.players, player]
+        })
+    }
+
+    onPlayerSale=(id)=>{
+        fetch('http://localhost:2000/players/sale', {
+            method: 'PUT',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({id})
+        })
+            .then(data=> {
+                if(data){
+                    this.setState(prevState=>{
+                        const newState =prevState.players.filter(player=>{
+                            return player._id !== id
+                        })
+                        return{
+                            players: newState
+                        }
+                    })
+                }
+            })
+            .catch(err=> console.log(err))
+      }
+
+    onPlayerRemove=(id)=>{
+        console.log(id)
+        fetch(`http://localhost:2000/players/delete/${id}`, {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify()
+        })
+        .then(response=>{
+            if(response.ok){
+                this.setState(prevState=>{
+                    const newState =prevState.players.filter(player=>{
+                        return player._id !== id
+                    })
+                    return{
+                        players: newState
+                    }
+                })
+            }else(alert('player cannot be deleted'))
+        })
+        .catch(err=> alert('bad request' + err.message))
+    }
 
     infoClick=(player)=>{
-        // console.log(player)
         this.setState({
            playerView:{
             id:player._id,
@@ -114,37 +134,47 @@ class Team extends Component {
 
 
     render() {
-        console.log('render')
-        // console.log(this.state.status)
         const players= this.state.players.map(player=>{
             return <Player 
                         player={player}    
                         key={player._id} 
                         onClick={this.infoClick}
-                        onPlayerRemove={this.props.onPlayerRemove}  
-                        onPlayerSale={this.props.onPlayerSale}  
+                        onPlayerRemove={this.onPlayerRemove}  
+                        onPlayerSale={this.onPlayerSale}  
                     />
         })
         
 
         return (
-            <div className='con_div'>
-                <div className='text-center'>
-                    <h4>{this.state.user.name} </h4>
-                    <h3>Arsenal Football Club</h3>
+            <div className='main-team'>
+                {/* <Header/> */}
+                <div className='con_div'>
+                    <Aux>
+                        <Route path='/team' exact>
+                            <div className='text-center'>
+                                <h4>{this.state.user.name} </h4>
+                                <h3>{this.state.user.club} Football Club</h3>
+                            </div>
+                            <div>
+                                <TeamAccount balance={this.state.user.account} />
+                            </div>
+                            {this.state.players.length <=0 ?
+                             <h1 style={{textAlign:'center', margin:'20px auto', width:'50%'}}>no players</h1> :
+                            <div className='contain_div'>
+                                <div>
+                                    {players}
+                                </div>
+                                <div className='info-div'>
+                                    <PlayerInfo player={this.state.playerView} />
+                                </div>
+                            </div>}
+                        </Route>
+                        <Route path='/team/addPlayer'>
+                            <AddPlayer addPlayer={this.addPlayer}  managerId ={this.state.user.id} />
+                        </Route>
+                    </Aux>
                 </div>
-                <div>
-                    <div>{this.state.user.name} </div>
-                    <TeamAccount balance={this.state.balance} />
-                </div>
-                <div className='contain_div'>
-                    <div>
-                        {players}
-                    </div>
-                    <div>
-                        <PlayerInfo player={this.state.playerView} />
-                    </div>
-                </div>
+                {/* <Footer/> */}
             </div>
             
         );

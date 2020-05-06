@@ -22,11 +22,11 @@ const SideDrawer = (props) => {
                 </ListItem>
 
                 <ListItem button onClick={()=>props.onClose(false)}>
-                    <Link to='/home/team'>Team</Link>
+                    <Link to='/team'>Team</Link>
                 </ListItem>
 
                 <ListItem button onClick={()=>props.onClose(false)}>
-                    <Link to='/home/addPlayer'>Add Player</Link>
+                    <Link to='/team/addPlayer'>Add Player</Link>
                 </ListItem>
 
             

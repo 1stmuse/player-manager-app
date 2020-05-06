@@ -1,13 +1,12 @@
 const router= require('express').Router();
-const Schema=require('mongoose').Schema
 
 let Player = require('../models/player.model');
 
 
-router.route('/').get((req, res)=>{
-    Player.find()
+router.route('/own/:id').get((req, res)=>{
+    Player.find({managerId:req.params.id, forSale:false})
         .then(users=> res.json(users))
-        .catch(err=> res.status(404).json('error' + err))
+        .catch(err=> res.status(404).json('error to get players' + err))
 })
 
 router.route('/addPlayer').post((req, res)=>{
@@ -20,8 +19,8 @@ router.route('/addPlayer').post((req, res)=>{
         position: req.body.position,
         value: req.body.value,
         strong_foot:req.body.strong_foot,
-        club: req.body.club
-        // managerId:Schema.Types.ObjectId(req.body.managerId)
+        club: req.body.club,
+        managerId:req.body.managerId
     }
 
     const newPlayer = new Player(playerInfo)
@@ -30,16 +29,29 @@ router.route('/addPlayer').post((req, res)=>{
      .catch(err=> res.status(404).json('error' + err) )
 })
 
-router.route('/:id').delete((req, res)=>{
+router.route('/delete/:id').delete((req, res)=>{
     Player.findByIdAndDelete(req.params.id)
         .then(()=>res.json('player deleted'))
         .catch(err=> res.status(404).json('error' + err))
 })
 
+router.route('/sale').put(async(req,res)=>{
 
-router.route('/playersForSale').post((req,res)=>{
-    const managerId= Schema.ObjectId(req.body.managerId)
-    Player.find({managerId:managerId})
+    const checkPlayerExist = await Player.findOne({_id: req.body.id})
+    if(!checkPlayerExist) return res.status(400).json('player does not exist')
+
+    try {
+        Player.findByIdAndUpdate({_id: req.body.id}, {forSale: true}, {new: true, useFindAndModify: false})
+        .then(data=>{
+            if(data) return res.status(200).json(data)
+        })
+    } catch (error) {
+        res.status(404).json(error, 'backend')
+    }
+})
+
+router.route('/forSale').get((req,res)=>{
+    Player.find({forSale: true})
         .then(players=>res.json(players))
         .catch(err=> res.status(404).json('error ' + err))
 })
