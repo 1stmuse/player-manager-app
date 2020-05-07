@@ -24,6 +24,9 @@ connection.once('open', ()=>{
 const playerRouter = require('./routes/player');
 const managerRouter = require('./routes/manager');
 
+app.use('/', (req,res)=>{
+    res.send('home page')
+})
 app.use('/players', playerRouter);
 app.use('/managers', managerRouter)
 
