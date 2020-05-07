@@ -12,7 +12,7 @@ const port= process.env.PORT || 2000
 // app.use(bodyParser)
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname,"../build")))
+app.use(express.static(path.join(__dirname,"../build")))
 
 const uri= 'mongodb+srv://muse_1st:akinn@cluster0-d1txe.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(uri, {useNewUrlParser:true, useUnifiedTopology:true});
