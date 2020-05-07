@@ -47,7 +47,7 @@ class Team extends Component {
 
     componentDidMount(){
         console.log(this.state.user)
-        fetch(`/players/own/${this.state.user.id}`) 
+        fetch(`http://localhost:2000/players/own/${this.state.user.id}`) 
             .then(res=>res.json())
             .then(data=>{
                 console.log(data)
@@ -71,7 +71,7 @@ class Team extends Component {
     }
 
     onPlayerSale=(id)=>{
-        fetch('/players/sale', {
+        fetch('http://localhost:2000/players/sale', {
             method: 'PUT',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({id})
@@ -93,7 +93,7 @@ class Team extends Component {
 
     onPlayerRemove=(id)=>{
         console.log(id)
-        fetch(`/players/delete/${id}`, {
+        fetch(`http://localhost:2000/players/delete/${id}`, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify()

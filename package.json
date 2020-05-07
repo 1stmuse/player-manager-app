@@ -15,12 +15,11 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "node backend/server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:2000",
   "eslintConfig": {
     "extends": "react-app"
   },
