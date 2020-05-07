@@ -51,7 +51,6 @@ router.route('/login').post( async(req,res)=>{
     
     try {
         const loginInfo={
-            // email:req.body.email,
             password: req.body.password,
             username: req.body.username
         }

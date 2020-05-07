@@ -25,7 +25,7 @@ class MarketPlace extends Component {
 
     info=(id)=>{
         this.props.players.map(player=>{
-            if(player._id==id){
+            if(player._id===id){
                 this.setState({
                     id:player._id,
                     name:player.name,

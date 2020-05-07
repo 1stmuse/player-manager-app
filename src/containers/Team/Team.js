@@ -4,9 +4,9 @@ import TeamAccount from '../../components/team_account/TeamAccount'
 import Player from '.././../components/players/Player'
 import {Route} from 'react-router-dom'
 import AddPlayer from '../addPlayer/AddPlayer'
+import Aux from '../../components/hoc'
 import Header from '../../components/header_footer/Header'
 import Footer from '../../components/header_footer/Footer'
-import Aux from '../../components/hoc'
 import './Team.css'
 
 
@@ -147,7 +147,7 @@ class Team extends Component {
 
         return (
             <div className='main-team'>
-                {/* <Header/> */}
+                <Header/>
                 <div className='con_div'>
                     <Aux>
                         <Route path='/team' exact>
@@ -169,12 +169,12 @@ class Team extends Component {
                                 </div>
                             </div>}
                         </Route>
-                        <Route path='/team/addPlayer'>
+                        <Route path='team/addPlayer'>
                             <AddPlayer addPlayer={this.addPlayer}  managerId ={this.state.user.id} />
                         </Route>
                     </Aux>
                 </div>
-                {/* <Footer/> */}
+                <Footer/>
             </div>
             
         );
