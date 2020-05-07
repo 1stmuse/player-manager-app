@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Welcome from '../../components/welcome/Welcome'
 import Login from '../../components/login-register/Login'
 import Register from '../../components/login-register/Register'
 import './getstarted.css'
@@ -17,6 +16,7 @@ class GetStarted extends Component {
 
     componentDidMount(){
         localStorage.removeItem('users')
+        console.log('removed user')
     }
 
     onLinkClick=(value)=>{

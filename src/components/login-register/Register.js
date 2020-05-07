@@ -13,7 +13,6 @@ class Register extends React.Component {
               username:'',
               club:'',
               password:'',
-              enter: true
          }
     }
 
