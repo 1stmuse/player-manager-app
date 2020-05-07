@@ -5,7 +5,7 @@ import Homepage from './homepage/Homepage'
 import Team from './Team/Team'
 import Header from '../components/header_footer/Header'
 import Footer from '../components/header_footer/Footer'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 
 function App() {
   const [user, setUser]= useState({
@@ -32,7 +32,7 @@ const storeduser =JSON.parse(localStorage.getItem('users'))
           <GetStarted loadUser={(e)=>LoadUser(e)} />
         </Route>
         <div className=''>
-          <Header/>
+          {/* <Header/> */}
           <div className='route-div'>
             <Route path='/home' >
               <Homepage user={storeduser} />
@@ -41,7 +41,7 @@ const storeduser =JSON.parse(localStorage.getItem('users'))
               <Team user={storeduser}/>
             </Route>
           </div>
-          <Footer/>
+          {/* <Footer/> */}
         </div>
       </div>
     </Router>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Welcome from '../../components/welcome/Welcome'
+// import Welcome from '../../components/welcome/Welcome'
 import Login from '../../components/login-register/Login'
 import Register from '../../components/login-register/Register'
 import './getstarted.css'
@@ -13,6 +13,10 @@ class GetStarted extends Component {
         this.state={
             signUp:true
         }
+    }
+
+    componentDidMount(){
+        localStorage.removeItem('users')
     }
 
     onLinkClick=(value)=>{
