@@ -6,7 +6,6 @@ import Header from '../../components/header_footer/Header'
 import Footer from '../../components/header_footer/Footer'
 
 import './HomePage.css'
-import Team from '../Team/Team';
 
 
 
