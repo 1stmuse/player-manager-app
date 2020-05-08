@@ -21,7 +21,7 @@ class Login extends React.Component{
 
    onSubmit=(event)=>{
        event.preventDefault();
-       fetch('http://localhost:2000/managers/login',{
+       fetch('/managers/login',{
            method:'POST',
            headers:{'Content-Type':'application/json'},
            body:JSON.stringify(this.state)
