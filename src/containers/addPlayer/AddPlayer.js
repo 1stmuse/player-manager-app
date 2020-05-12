@@ -29,7 +29,7 @@ class AddPlayer extends Component {
     createPlayer=(event)=>{
         event.preventDefault();
         const player=this.state
-        fetch('/players/addPlayer', {
+        fetch('/api/players/addPlayer', {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify(player)

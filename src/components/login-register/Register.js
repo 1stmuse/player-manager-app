@@ -25,7 +25,7 @@ class Register extends React.Component {
 
     handleSubmit=(event)=>{
          
-               fetch('/managers/register', {
+               fetch('/api/managers/register', {
                     method: 'POST',
                     headers:{'Content-Type':'application/json'},
                     body: JSON.stringify(this.state)

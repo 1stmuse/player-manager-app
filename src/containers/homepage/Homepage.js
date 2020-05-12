@@ -17,7 +17,7 @@ class Homepage extends Component {
     }
 
     componentDidMount(){
-        fetch('/players/forSale')
+        fetch('/api/players/forSale')
         .then(res=> res.json())
         .then(players=>{
             console.log('from response', players)
