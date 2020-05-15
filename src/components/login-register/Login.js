@@ -31,6 +31,7 @@ class Login extends React.Component{
            if(data){
                this.props.loadUser(data)
                this.props.history.push('/team')
+               console.log(data)
            }else{
                console.log('no response')
            }

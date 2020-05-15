@@ -1,9 +1,9 @@
 .container{
     margin-top: 60px;
-    background: rgba(216, 216, 216, 0.883);
-    opacity: 0.9;
 }
-
+.form{
+    box-shadow: none;
+}
 
 .addplayer_form{
     display: flex;
@@ -26,7 +26,6 @@
 .main_form{
     margin: 10px auto;
     width: 500px;
-    /* border: 1px solid maroon !important; */
 }
 
 .main_row{
@@ -35,7 +34,6 @@
 
 p{
     width: 100px;
-    /* border: 1px solid grey; */
     margin-top: 15px;
     margin-bottom: 0;
 }

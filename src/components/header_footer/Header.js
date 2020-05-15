@@ -28,7 +28,7 @@ class Header extends Component {
                 style={{
                     backgroundColor:'#2f2f2f',
                     boxShadow:'none',
-                    padding:'1px 0px'
+                    padding:'1px 0px',
                 }}
             >
                 <ToolBar>

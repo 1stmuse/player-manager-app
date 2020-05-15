@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Aux from '../../components/hoc'
 import MarketPlace from '../../containers/marketPlace/MarketPlace'
-import {Route} from 'react-router-dom'
 import Header from '../../components/header_footer/Header'
 import Footer from '../../components/header_footer/Footer'
 

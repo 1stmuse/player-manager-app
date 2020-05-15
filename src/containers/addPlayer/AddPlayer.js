@@ -18,7 +18,9 @@ class AddPlayer extends Component {
             managerId: this.props.managerId
     }
 
-
+    componentDidMount(){
+        console.log('add player monted')
+    }
     onHandleChange=(event)=>{
         const {name, value} = event.target
         this.setState({

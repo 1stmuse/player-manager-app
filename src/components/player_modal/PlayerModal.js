@@ -7,7 +7,7 @@ const PlayerModal = ({player, hideModal}) => {
     return (
         <div className='player_modal_info'>
             <div className='img_div'>
-                <img src={`https://robohash.org/${player.id}?200x200`} alt='image'/>
+                <img src={`https://robohash.org/${player.id}?200x200`} alt='robohash'/>
             </div>
             <div>
                <table className='table info_modal_table'>

@@ -20,7 +20,7 @@ code {
 .App{
   /* position: relative; */
   border: 1px solid red;
-  height:auto
+  min-height: 100vh;
 }
 .route-div{
   height: 100vh;

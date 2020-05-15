@@ -149,30 +149,30 @@ class Team extends Component {
             <div className='main-team'>
                 <Header/>
                 <div className='con_div'>
+                    <Route path='/team' exact>
                     <Aux>
-                        <Route path='/team' exact>
-                            <div className='text-center'>
-                                <h4>{this.state.user.name} </h4>
-                                <h3>{this.state.user.club} Football Club</h3>
-                            </div>
+                        <div className='text-center'>
+                            <h4>{this.state.user.name} </h4>
+                            <h3>{this.state.user.club} Football Club</h3>
+                        </div>
+                        <div>
+                            <TeamAccount balance={this.state.user.account} />
+                        </div>
+                        {this.state.players.length <=0 ?
+                            <h1 style={{textAlign:'center', margin:'20px auto', width:'50%'}}>no players</h1> :
+                        <div className='contain_div'>
                             <div>
-                                <TeamAccount balance={this.state.user.account} />
+                                {players}
                             </div>
-                            {this.state.players.length <=0 ?
-                             <h1 style={{textAlign:'center', margin:'20px auto', width:'50%'}}>no players</h1> :
-                            <div className='contain_div'>
-                                <div>
-                                    {players}
-                                </div>
-                                <div className='info-div'>
-                                    <PlayerInfo player={this.state.playerView} />
-                                </div>
-                            </div>}
-                        </Route>
-                        <Route path='team/addPlayer'>
-                            <AddPlayer addPlayer={this.addPlayer}  managerId ={this.state.user.id} />
-                        </Route>
+                            <div className='info-div'>
+                                <PlayerInfo player={this.state.playerView} />
+                            </div>
+                        </div>}
                     </Aux>
+                    </Route>
+                    <Route path='/team/addPlayer'>
+                        <AddPlayer addPlayer={this.addPlayer}  managerId ={this.state.user.id} />
+                    </Route>
                 </div>
                 <Footer/>
             </div>

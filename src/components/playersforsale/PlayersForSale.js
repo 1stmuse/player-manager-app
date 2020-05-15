@@ -12,7 +12,7 @@ const PlayersForSale = ({player, info}) => {
     return (
         <div className='player_desc'>
             <div className='text-center'>
-                <img src={`https://robohash.org/${player._id}?200x200`} alt='image' />
+                <img src={`https://robohash.org/${player._id}?200x200`} alt='robohash' />
             </div>
             <div className='player_short_info'>
                 <table className='player_short_info_table'>
